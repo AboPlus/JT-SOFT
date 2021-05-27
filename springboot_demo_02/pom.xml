@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.jt</groupId>
+    <artifactId>springboot_demo_02</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- 1.parent标签的作用：
+        parent标签中规定了SpringBoot与其他框架整合时候所用到的jar包的版本的定义
+        这些jar包的版本都是经过官方测试的。几乎不会出现版本冲突
+        总结：版本的定义
+     -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <!-- 3.指定当前Maven工程的JDK版本 -->
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <!-- 4.jar包文件的依赖  如果需要某些功能，则使用依赖进行导入
+         按需导入
+         大部分jar包都进行了定义，如果没有则需要手动导入，此时需自定版本
+         -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <!-- spring-boot-starter:springboot的启动项
+              SpringBoot官网针对该框架已经完成了“配置”，用户只需要简单的配置既可以使用该功能
+              -->
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--支持热部署 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+
+        <!-- 支持lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <!-- 5.Maven通过插件对maven版本的springboot进行管理
+        体现：项目打包/发布/测试/等相关操作。
+     -->
+    <build>
+        <plugins>
+            <!-- springboot专门为springboot的工程开发了一款项目管理插件 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
