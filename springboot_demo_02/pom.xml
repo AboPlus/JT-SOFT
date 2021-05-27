@@ -56,6 +56,24 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
+        <!-- 导入Mybatis相关依赖 -->
+        <!--引入数据库驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!--springBoot数据库连接  -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <!--spring整合mybatis  暂时  -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.1.4</version>
+        </dependency>
     </dependencies>
 
     <!-- 5.Maven通过插件对maven版本的springboot进行管理
