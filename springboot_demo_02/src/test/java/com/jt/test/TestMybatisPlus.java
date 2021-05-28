@@ -6,6 +6,7 @@ import com.jt.pojo.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -103,5 +104,61 @@ public class TestMybatisPlus {
         List<User> userList = userMapper.selectList(queryWrapper);
         System.out.println(userList);
     }
+
+    /**
+     * 查询多个数据
+     * 查询ID=1 3 6 7 的数据
+     * where id in(xx,xx,xx,xx)
+     * 注*如遇到多值传参，一般采用对象的方式封装
+     */
+    @Test
+    public void select05(){
+        Integer[] ids = {1,3,6,7};
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("id", ids);
+        List<User> userList = userMapper.selectList(queryWrapper);
+        System.out.println(userList);
+    }
+
+    /**
+     * 需求：查询name为null的数据
+     */
+    @Test
+    public void select06(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.isNull("name");
+        List<User> userList = userMapper.selectList(queryWrapper);
+        System.out.println(userList);
+    }
+
+    /**
+     * 动态sql查询：
+     *  要求：根据age属性与sex属性进行查询
+     *        如果其中数据为null，则不参与where条件的拼接
+     *        where age>18 and sex="男"
+     *  正确SQL：SELECT id,name,age,sex FROM demo_user WHERE (age > 18 AND sex = "男")
+     *  错误SQL：SELECT id,name,age,sex FROM demo_user WHERE (age > 18 AND sex = null)
+     *  MP实现动态查询：
+     *      参数1：condition boolean类型数据   true    拼接条件
+     *                                        false   不拼接条件
+     *      参数2：字段名
+     *      参数3：字段值
+     *  如果age和sex都不符合规定，则查询的是全部数据
+     */
+    @Test
+    public void select07(){
+        Integer age = 18;
+        String sex = "男";
+        //boolean flag = sex != null && sex.length()>0;
+        boolean flag = StringUtils.hasLength(sex);
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.gt(age>0, "age", age)
+                    .eq(flag,"sex" ,sex );
+        List<User> userList = userMapper.selectList(queryWrapper);
+        System.out.println(userList);
+    }
+
+
+
 
 }
