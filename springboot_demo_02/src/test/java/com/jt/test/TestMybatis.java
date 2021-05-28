@@ -22,10 +22,20 @@ public class TestMybatis {
 
     //关于测试类代码说明：要求：public 返回值void 方法名称不能叫Test
     @Test
-    public void testInsert(){
+    public void test01(){
         System.out.println(userMapper.getClass());
         List<User> userList = userMapper.findAll();
         System.out.println(userList);
     }
+
+    //查询 用户的全部记录
+    //缺点：只能用于单表查询
+    @Test
+    public void testFind(){
+        //null表示不需要任何where条件，查询的是全部记录
+        List<User> userList = userMapper.selectList(null);
+        System.out.println(userList);
+    }
+
 
 }

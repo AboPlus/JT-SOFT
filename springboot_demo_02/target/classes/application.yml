@@ -12,8 +12,9 @@ spring:
     username: root
     password: root  #密码不能以0开头，一定要以0开头要加""
 
-#mybatis整合
-mybatis:
+#mybatis整合 -- 替换成MP之后，配置名要替换为mybatis-plus
+#mybatis:
+mybatis-plus:
   #定义别名包，之后在mapper.xml中写resultType时就不用写包名了
   type-aliases-package: com.jt.pojo
   #加载mapper的映射文件
