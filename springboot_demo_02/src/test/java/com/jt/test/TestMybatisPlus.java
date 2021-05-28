@@ -55,8 +55,7 @@ public class TestMybatisPlus {
      * SQL: ... where name="xxx" and sex="xxx"
      * queryWrapper:条件构造器  用于拼接where条件
      * 如果遇到多条件查询，则默认的连接符为and  如：SELECT id,name,age,sex FROM demo_user WHERE name=? AND sex=?
-     * 方式一：可以通过对象的方式进行控制
-     *
+     * 方式一：可以通过对象的方式进行控制，需要通过对象只能实现=号的条件
      */
     @Test
     public void select02(){
