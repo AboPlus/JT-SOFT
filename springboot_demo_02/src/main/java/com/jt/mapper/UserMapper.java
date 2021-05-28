@@ -18,11 +18,11 @@ public interface UserMapper extends BaseMapper<User> {
     //查询全部用户信息
     List<User> findAll();
 
-    @Insert("insert into demo_user(id,name,age,sex) values(null,#{name},#{age},#{sex})")
+    @Insert("insert into demo_user(id,name,sex,age) values(null,#{name},#{age},#{sex})")
     void insertUser(User user);
 
-    @Update("update demo_user set name=#{newName} where name=#{oldName}")
-    void updateByName(String oldName, String newName);
+    @Update("update demo_user set name=#{newName},age=#{newAge} where name=#{oldName}")
+    void updateByName(String oldName, String newName, Integer newAge);
 
     /* Mybatis中如果传递的参数只有一个，则名称任意，如name=#{abc},但是一般不这么使用 */
     @Delete("delete from demo_user where name=#{name}")

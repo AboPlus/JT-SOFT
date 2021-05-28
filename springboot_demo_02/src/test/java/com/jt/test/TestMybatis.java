@@ -40,21 +40,22 @@ public class TestMybatis {
     @Test
     public void insert(){
         User user = new User();
-        user.setName("张三").setSex("男").setAge(18);
+        user.setName("张三").setAge(18).setSex("男");
         userMapper.insertUser(user);
         System.out.println("新增用户成功！");
     }
 
-    //将姓名为张三的用户的姓名改为李四
+    //将姓名为张三的用户的姓名改为李四,年龄改为20
     @Test
     public void update(){
-        String oldName = "张三";
-        String newName = "李四";
-        userMapper.updateByName(oldName,newName);
-        System.out.println("更新用户成功！");
+        String oldName="张三";
+        String newName="李四";
+        Integer newAge=20;
+        userMapper.updateByName(oldName,newName,newAge);
+        System.out.println("修改用户成功！");
     }
 
-    //根据name属性删除
+    //将姓名为李四的用户数据删除
     @Test
     public void delete(){
         String name="李四";
