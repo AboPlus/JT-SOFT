@@ -23,5 +23,7 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
 
-  
-  
+#添加日志
+logging:
+  level:
+    com.jt.mapper: debug
