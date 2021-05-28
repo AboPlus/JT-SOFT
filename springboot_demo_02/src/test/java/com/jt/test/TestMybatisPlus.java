@@ -68,4 +68,41 @@ public class TestMybatisPlus {
         System.out.println(userList);
     }
 
+    /*
+    * 要求:年龄>18岁 sex=男 的用户
+    * 转义字符：
+    *   >  gt   (greater than)
+    *   <  lt   (less than)
+    *   =  eq   (equal)
+    *   >= ge   (great than or equal)
+    *   <= le   (less than or equal)
+    *   != ne   (not equal)
+    * */
+    @Test
+    public void select03(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.gt("age", 18)
+                    .or()
+                    .eq("sex", "男");
+        List<User> userList = userMapper.selectList(queryWrapper);
+        System.out.println(userList);
+    }
+
+    /**
+     * 要求查询名字中包含"精"字的用户，并且按照age进行降序排列
+     * SQL: like "%精%"  包含精
+     *      like "精%"   以精开头
+     *      like "%精"   以精结尾
+     */
+    @Test
+    public void select04(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        /*queryWrapper.likeLeft("name", "精")  //百分号在左就是likeLeft 百分号在右就是likeRight
+                    .orderByDesc("age");*/
+        queryWrapper.like("name", "%精%")  //或者直接使用like  手动添加%
+                    .orderByDesc("age");
+        List<User> userList = userMapper.selectList(queryWrapper);
+        System.out.println(userList);
+    }
+
 }
