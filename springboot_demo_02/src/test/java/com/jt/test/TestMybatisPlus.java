@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 public class TestMybatisPlus {
@@ -158,7 +159,48 @@ public class TestMybatisPlus {
         System.out.println(userList);
     }
 
+    /**
+     * demo1
+     * 只查询name,age的字段信息
+     * queryWrapper.select("name","age");中的select表示挑选查询的字段
+     * demo2:要求只返回name，age的字段
+     */
+    @Test
+    public void select08(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("name","age");
+        //没查询的数据以null返回
+        List<User> userList = userMapper.selectList(queryWrapper);
+        System.out.println(userList);
+    }
 
+    /**
+     * demo2
+     * 只查询name,age的字段信息
+     * queryWrapper.select("name","age");中的select表示挑选查询的字段
+     *  要求只返回name，age的字段 ———— selectMaps
+     */
+    @Test
+    public void select09(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("name","age");
+        //没查询的数据以null返回
+        List<Map<String, Object>> list = userMapper.selectMaps(queryWrapper);
+        System.out.println(list);
+    }
 
+    /**
+     * demo3
+     * 查询性别为女的数据
+     *  要求只第一列的数据 ———— selectObjs，可以不传参数，不传参数就位查询所有数据的第一列数据
+     */
+    @Test
+    public void select10(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("sex", "女");
+        //没查询的数据以null返回
+        List<Object> list = userMapper.selectObjs(queryWrapper);
+        System.out.println(list);
+    }
 
 }
