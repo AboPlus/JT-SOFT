@@ -7,7 +7,7 @@ server:
 spring:
   datasource:
     #不写的话mybatis会自动匹配driver-class-name版本是com.mysql.cj.jdbc.Driver还是com.mysql.jdbc.Driver
-    #driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/jt?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
     username: root
     password: root  #密码不能以0开头，一定要以0开头要加""

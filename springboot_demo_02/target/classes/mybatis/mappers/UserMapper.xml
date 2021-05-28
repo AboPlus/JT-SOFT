@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+ 	namespace规则：
+ 		1.命名空间名称 唯一不能重复
+ 		2.namespace必须与接口形成映射关系(路径)
+ 		3.接口方法的名称必须与SQL标签中的id一致
+ -->
+<mapper namespace="com.jt.mapper.UserMapper">
+
+	<!-- 当程序返回对象时，resultType会根据别名包进行拼接pojo对象，在yml配置文件中配置 -->
+	<select id="findAll" resultType="User">
+		select * from demo_user
+	</select>
+</mapper>

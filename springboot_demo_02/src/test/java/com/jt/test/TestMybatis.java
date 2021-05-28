@@ -15,10 +15,12 @@ import java.util.List;
 @SpringBootTest
 public class TestMybatis {
 
+    //Spring容器<userMapper,代理对象>
     //面向接口编程 扩展性好
-    @Autowired
+    @Autowired  //两种注入方式：name注入，类型注入
     private UserMapper userMapper;//JDK动态代理
 
+    //关于测试类代码说明：要求：public 返回值void 方法名称不能叫Test
     @Test
     public void testInsert(){
         System.out.println(userMapper.getClass());

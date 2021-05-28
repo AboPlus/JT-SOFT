@@ -1,0 +1,26 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /mybatis
+
+#连接数据源
+spring:
+  datasource:
+    #不写的话mybatis会自动匹配driver-class-name版本是com.mysql.cj.jdbc.Driver还是com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/jt?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
+    username: root
+    password: root  #密码不能以0开头，一定要以0开头要加""
+
+#mybatis整合
+mybatis:
+  #定义别名包，之后在mapper.xml中写resultType时就不用写包名了
+  type-aliases-package: com.jt.pojo
+  #加载mapper的映射文件
+  mapper-locations: classpath:/mybatis/mappers/*.xml
+  #开启驼峰映射 开启了之后数据表字段名类user_id会被映射成userId
+  configuration:
+    map-underscore-to-camel-case: true
+
+  
+  

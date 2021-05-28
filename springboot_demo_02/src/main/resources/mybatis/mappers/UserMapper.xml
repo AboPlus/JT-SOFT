@@ -11,7 +11,7 @@
  -->
 <mapper namespace="com.jt.mapper.UserMapper">
 
-	<!-- 当程序返回对象时，resultType会根据别名包进行拼接 -->
+	<!-- 当程序返回对象时，resultType会根据别名包进行拼接pojo对象，在yml配置文件中配置 -->
 	<select id="findAll" resultType="User">
 		select * from demo_user
 	</select>
