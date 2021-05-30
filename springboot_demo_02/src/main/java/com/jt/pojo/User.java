@@ -26,4 +26,5 @@ public class User {
     private Integer age;
     //@TableField("sex")//对象的属性与表中的字段关联
     private String sex;
+
 }
