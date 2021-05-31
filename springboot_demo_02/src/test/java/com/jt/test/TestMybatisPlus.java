@@ -216,4 +216,21 @@ public class TestMybatisPlus {
         System.out.println("修改用户信息成功！");
     }
 
+    /**
+     * 更新操作2
+     *      将name="李四" 改为 "王五"
+     *      参数说明：
+     *          entity – 实体对象 (set 条件值,可以为 null)   封装修改后的数据
+     *          updateWrapper/queryWrapper – 实体对象封装操作类（可以为 null,里面的 entity 用于生成 where 语句）
+     */
+    @Test
+    public void updateUser2(){
+        User user = new User();
+        user.setName("王五");
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("name", "李四");
+        userMapper.update(user,queryWrapper);
+        System.out.println("修改用户信息成功!");
+    }
+
 }
