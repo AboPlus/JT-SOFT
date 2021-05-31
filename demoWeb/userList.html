@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表展现</title>
+
+    <!-- 1.导入JS函数类库 -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <!-- 2.编辑JS发起Ajax请求 -->
+    <script>
+        //让页面加载完成后再次执行
+        //语法：函数式编程
+        $(function (){
+            //alert("页面加载完成，jQuery调用成功")
+
+            //利用Ajax的get请求  获取全部数据
+            // http://localhost:8090/vue/getUser
+            //将数据以表格的形式列表展现
+            //ajax的种类：1.$get() 2.$.post 3.$.getJson() 4.$.ajax()
+            //js中可以根据返回值的数据动态匹配类型,故一般可以不写
+            //$.get("url地址","参数(传递的数据)",function(data){},"返回值类型")
+            let url = "http://localhost:8090/vue/getUser";
+            //参数的写法1:key=value&key2=value2
+            let name = "张三"
+            let age = 18
+            let args1 = "name="+name+"$age="+age
+            //参数对象写法：{key:value,key2:value2}
+            let args2 = {name:name,age:age}
+            //有参数就直接添加，如果没有参数可以省略不写 这里不需要参数，可以选择不写
+            $.get(url,function (data){
+                //console.log(data)
+                //1.js实现for循环
+                /*for (let i=0;i<data.length;i++){
+                    let user = data[i]
+                    console.log(user)
+                }*/
+
+                //2.增强for写法  in关键字 in表示遍历的是下标  index表示下标
+                /*for (let index in data){
+                    console.log(data[index])
+                }*/
+
+                //3.增强for写法  of  表示直接获取遍历内容,user是一个对象
+                for (let user of data){
+                    let id = user.id
+                    let name = user.name
+                    let age = user.age
+                    let sex = user.sex
+                    let tr = "<tr align='center'><td>"+user.id+"</td><td>"+user.name+
+                             "</td><td>"+user.age+"</td><td>"+user.sex+"</td></tr>"
+                    //利用ID选择器定位table标签
+                    //append 向每个匹配的元素内部追加内容
+                    $("#tab1").append(tr)
+                }
+
+
+
+            })
+        })
+    </script>
+</head>
+<body>
+    <table id="tab1" border="1px" width="500px" align="center">
+        <tr>
+            <td colspan="4" align="center"><h1>表格数据</h1></td>
+        </tr>
+        <tr align="center">
+            <td>ID</td>
+            <td>名称</td>
+            <td>年龄</td>
+            <td>性别</td>
+        </tr>
+        <!--<tr align="center">
+            <td>100</td>
+            <td>测试数据1</td>
+            <td>18</td>
+            <td>女</td>
+        </tr>
+        <tr align="center">
+            <td>101</td>
+            <td>测试数据2</td>
+            <td>24</td>
+            <td>男</td>
+        </tr>-->
+    </table>
+</body>
+</html>
