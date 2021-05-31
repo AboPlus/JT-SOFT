@@ -77,7 +77,7 @@ public class TestMybatisPlus {
     *   =  eq   (equal)
     *   >= ge   (great than or equal)
     *   <= le   (less than or equal)
-    *   != ne   (not equal)
+    *   <> ne   (not equal)
     * */
     @Test
     public void select03(){
@@ -110,7 +110,7 @@ public class TestMybatisPlus {
      * 查询多个数据
      * 查询ID=1 3 6 7 的数据
      * where id in(xx,xx,xx,xx)
-     * 注*如遇到多值传参，一般采用对象的方式封装
+     * 注*如遇到多值传参，一般采用对象的方式封装，因为基本类型没有get/set方法，无法取值
      */
     @Test
     public void select05(){
@@ -201,6 +201,19 @@ public class TestMybatisPlus {
         //没查询的数据以null返回
         List<Object> list = userMapper.selectObjs(queryWrapper);
         System.out.println(list);
+    }
+
+
+    /**
+     * 将id=234的用户名称改为"李四"
+     */
+    @Test
+    public void uodateUser(){
+        User user = new User();
+        user.setId(234).setName("李四");
+        //UPDATE demo_user SET name=? WHERE id=?
+        userMapper.updateById(user);
+        System.out.println("修改用户信息成功！");
     }
 
 }

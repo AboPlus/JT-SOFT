@@ -27,4 +27,8 @@ public class User {
     //@TableField("sex")//对象的属性与表中的字段关联
     private String sex;
 
+    //若自定义一个数据库中不存在该字段的属性，如dog，MP也会将dog属性当做数据库字段进行处理，SQL必然报错
+    /*@TableField(exist = false)    //不参与SQL的配置
+    private Dog dog;*/
+
 }
