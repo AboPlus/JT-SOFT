@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户数据</title>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function (){
+            let url = "http://localhost:8090/vue/getUser"
+            $.get(url,function (data){
+                /*for(let user of data){
+                    console.log(data)
+                    let tr = "<tr align='center'><td>"+user.id+"</td><td>"+user.name+
+                             "</td><td>"+user.age+"</td><td>"+user.sex+"</td></tr>"
+                    $("#tab1").append(tr)
+                }*/
+                /*for (let index in data){
+                    let tr = "<tr align='center'><td>"+data[index].id+"</td><td>"+data[index].name+"</td><td>"
+                             +data[index].age+"</td><td>"+data[index].sex+"</td></tr>"
+                    $("#tab1").append(tr)
+                }*/
+                for (let i=0;i<data.length;i++){
+                    let tr = "<tr align='center'><td>"+data[i].id+"</td><td>"+data[i].name+"</td><td>"
+                        +data[i].age+"</td><td>"+data[i].sex+"</td></tr>"
+                    $("#tab1").append(tr)
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <table align="center" id="tab1" border="1px" width="500px">
+        <tr>
+            <td align="center" colspan="4"><h1>用户数据</h1></td>
+        </tr>
+        <tr align="center">
+            <td>id</td>
+            <td>name</td>
+            <td>age</td>
+            <td>sex</td>
+        </tr>
+
+    </table>
+</body>
+</html>

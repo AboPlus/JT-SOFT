@@ -21,8 +21,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<User> getUser() {
         //因为是查询所有数据，即不需要where条件，故传入null
-        List<User> userList = userMapper.selectList(null);
-        return userList;
+        return userMapper.selectList(null);
     }
 
 
