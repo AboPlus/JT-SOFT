@@ -208,7 +208,7 @@ public class TestMybatisPlus {
      * 将id=234的用户名称改为"李四"
      */
     @Test
-    public void uodateUser(){
+    public void updateUser(){
         User user = new User();
         user.setId(234).setName("李四");
         //UPDATE demo_user SET name=? WHERE id=?
