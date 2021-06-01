@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue入门案例</title>
+</head>
+<body>
+    <!-- 1.语法规则：vue中必须定义根目录标签 -->
+    <div id="app">  <!-- 习惯给根目录（div）的id给app -->
+        <!-- 利用插值表达值 获取数据 -->
+        {{hello}}
+    </div>
+    <!-- 2.引入vue.js -->
+    <script src="../js/vue.js"></script>
+    <!-- 3.编辑vue.js -->
+    <script>
+        /**
+         * ES6 新规范
+         * 1.定义变量 var   弊端：没有作用域的概念
+         *   如果变量名称重复则可能会引发问题。
+         * 2.定义变量 let   有作用域的概念
+         * 3.定义常量const  全局唯一，不可更改
+         */
+        const app = new Vue({
+            //标识Vue对象的作用范围
+            el:"#app",
+            //定义数据对象
+            data:{
+                hello:"helloVue"
+            }
+        })
+    </script>
+</body>
+</html>
