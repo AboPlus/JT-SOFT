@@ -41,7 +41,7 @@
                 }*/
 
                 //3.增强for写法  of  表示直接获取遍历内容,user是一个对象
-                for (let user of data){
+                /*for (let user of data){
                     let id = user.id
                     let name = user.name
                     let age = user.age
@@ -51,7 +51,35 @@
                     //利用ID选择器定位table标签
                     //append 向每个匹配的元素内部追加内容
                     $("#tab1").append(tr)
-                }
+                }*/
+
+                /**
+                 * $.ajax相关说明
+                 * 1.{key:value}
+                 * 2.type:ajax请求的方式 get/post/put/delete
+                 * 3.简化$.get(...)  $.post(...)
+                 * 4.url:远程服务器地址
+                 * JSONP：JS端解决跨域问题的一种机制，现在几乎淘汰了
+                 * cache:默认值为true
+                 * async:默认值true，默认异步
+                 */
+                $.ajax({
+                    type:"get",
+                    url:"http://localhost:8090/vue/getUser",
+                    //data:{key1:value1,key2,value2},
+                    //dataType:"json",
+                    //async:false,//异步改为同步
+                    success:function (result){
+                        for (let user of result){
+                            let tr = "<tr align='center'><td>"+user.id+"</td><td>"+user.name+"</td><td>"+
+                                     user.age+"</td><td>"+user.sex+"</td></tr>"
+                            $("#tab1").append(tr)
+                        }
+                    },
+                    error:function (){
+                        alert("服务器正忙，请稍后!")
+                    }
+                })
 
 
 
