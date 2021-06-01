@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-cloak</title>
+
+    <!-- html样式 -->
+    <style>
+        /* 为属性定义样式   []是属性选择器 #是id选择器 .是class选择器 */
+        [v-cloak]{
+            /* 定义样式不显示 */
+            display: none;
+        }
+        /*
+        #id{
+
+        }
+        .class{
+
+        }
+        */
+    </style>
+
+</head>
+<body>
+    <!-- v-cloak说明:
+            当程序编译结束时，v-cloak将失去效果
+            编译没有结束时，v-cloak会发挥作用
+     -->
+    <div id="app" v-cloak>
+        {{hello}}
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data:{
+                hello: "helloVue"
+            }
+        })
+    </script>
+</body>
+</html>
