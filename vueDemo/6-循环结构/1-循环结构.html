@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>循环结构</title>
+
+</head>
+<body>
+    <div id="app">
+        <!-- vue中的循环 -->
+        <!-- v-for语法1
+            1.循环获取数据的内容
+            *2.可以循环复制标签 ———— 每遍历一次就会带着标签一起复制一次
+            参数说明：
+                item:变量名称   名称任意
+                in:关键字  固定写法
+                array:要遍历的数据
+            循环后的结构为：
+            <h1>安琪拉</h1>
+            <h1>孙悟空</h1>
+            <h1>诸葛亮</h1>
+         -->
+        <h1 v-for="item in array">{{item}}</h1>
+
+        <hr>
+
+        <!-- 2.v-for语法2:获取数据/下标 -->
+        <h1 v-for="(item,index) in array">{{item}}的索引值是{{index}}</h1>
+
+        <hr>
+
+        <!-- 3.循环遍历集合信息 -->
+        <div v-for="item in userList">
+            <p>ID号：{{item.id}}</p>
+            <p>名称：{{item.name}}</p>
+        </div>
+
+
+
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                array: ["安琪拉","孙悟空","诸葛亮"],
+                userList: [{
+                    id: 100,
+                    name: "张三"
+                },{
+                    id: 200,
+                    name: "李四"
+                },{
+                    id: 300,
+                    name: "王五"
+                }]
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+</html>
