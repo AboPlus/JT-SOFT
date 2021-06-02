@@ -20,12 +20,12 @@
             <h1>孙悟空</h1>
             <h1>诸葛亮</h1>
          -->
-        <h1 v-for="item in array">{{item}}</h1>
+        <h5 v-for="item in array">{{item}}</h5>
 
         <hr>
 
         <!-- 2.v-for语法2:获取数据/下标 -->
-        <h1 v-for="(item,index) in array">{{item}}的索引值是{{index}}</h1>
+        <h5 v-for="(item,index) in array">{{item}}的索引值是{{index}}</h5>
 
         <hr>
 
@@ -35,6 +35,29 @@
             <p>名称：{{item.name}}</p>
         </div>
 
+        <hr>
+
+        <!-- 4.如果直接遍历对象，只用一个变量接收的话则输出的是对象的value值
+               如果用两个变量接收的话，第一个变量获取的是value，第二个变量获取的是key
+               如果用三个变量接收的话，第一个变量获取的是value，第二个变量获取的是key，第三个变量获取的是index
+         -->
+        <div v-for="item in user">{{item}}</div>
+        <hr>
+        <div v-for="(value,key) in user">{{key}} : {{value}}</div>
+        <hr>
+        <div v-for="(value,key,index) in user">{{key}} : {{value}} 索引值是{{index}}</div>
+        <hr>
+        <!-- 如不采用插值表达式可使用<span>标签添加v-text属性赋值
+                <span>标签 ———— 无色无味、纯洁的标签
+                上述代码可写成下种方式
+         -->
+        <div v-for="(value,key,index) in user">
+            <span v-text="key"></span>
+            :
+            <span v-text="value"></span>
+            索引值为：
+            <span v-text="index"></span>
+        </div>
 
 
     </div>
@@ -53,7 +76,13 @@
                 },{
                     id: 300,
                     name: "王五"
-                }]
+                }],
+                /* 定义user对象 */
+                user: {
+                    id: 200,
+                    name: "鲤鱼王",
+                    age: 18
+                }
             },
             methods: {
 
