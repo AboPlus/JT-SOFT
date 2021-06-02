@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单数据提交</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 1.定义表单 练习form标签与vue对象形成数据绑定 -->
+        <form action="http://www.baidu.com">
+            用户名：<input type="text" v-model="user.username">
+            <br>
+            密&nbsp;&nbsp;&nbsp;码：<input type="password" v-model="user.password">
+            <br>
+            用户详情：<textarea v-model="user.info"></textarea>
+            <br>
+            <!-- 定义下拉选框 -->
+            购买书籍：
+            <select name="book" v-model="user.book">
+                <option value="java编程思想">java编程思想</option>
+                <option value="java疯狂讲义">java疯狂讲义</option>
+                <option value="java技术卷">java技术卷</option>
+            </select>
+            <br>
+            <!-- 单选框练习 -->
+            性别：
+            <input type="radio" value="男" name="gender" v-model="user.gender">男
+            <input type="radio" value="女" name="gender" v-model="user.gender">女
+            <br>
+            <!-- 复选框练习 值有多个 -->
+            爱好：
+            <input type="checkbox" value="吃" name="hobby" v-model="user.hobby">吃
+            <input type="checkbox" value="喝" name="hobby" v-model="user.hobby">喝
+            <input type="checkbox" value="玩" name="hobby" v-model="user.hobby">玩
+            <input type="checkbox" value="乐" name="hobby" v-model="user.hobby">乐
+            <br>
+            <!-- 阻止标签的默认行为  采用其他方式提交 -->
+            <input type="submit" value="提交" @click.prevent="addForm">
+        </form>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                user: {
+                    username: "",
+                    password: "",
+                    info: "",
+                    book: "java技术卷",
+                    gender: "",
+                    hobby: []
+                }
+            },
+            methods: {
+                addForm(){
+                    console.log("用户名："+this.user.username)
+                    console.log("密码："+this.user.password)
+                    console.log("用户详情："+this.user.info)
+                    console.log("购买书籍："+this.user.book)
+                    console.log("性别："+this.user.gender)
+                    console.log("爱好："+this.user.hobby)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
