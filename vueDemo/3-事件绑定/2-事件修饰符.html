@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件修饰符</title>
+</head>
+<body>
+    <div id="app">
+
+        <!-- 事件冒泡：
+            如果将来事件有嵌套关系，执行完内部事件之后，执行外部事件，这种现象称之为事件冒泡
+            1.阻止事件冒泡  语法：
+                1.v-on:click.stop="xxx"
+                2.@click.stop
+         -->
+        <div @click="addNum2">
+            <h3>{{num}}</h3>
+            <br>
+            <button @click.stop="addNum">自增1</button>
+        </div>
+
+        <hr>
+
+        <!-- 2.阻止默认行为
+            如果需要阻止标签的默认的行为，则添加@click.prevent
+         -->
+        <div>
+            <h3>阻止默认行为</h3>
+            <a href="http://www.baidu.com" @click.prevent="baidu">百度</a>
+        </div>
+
+        <hr>
+
+        <!-- 3.
+            需求：要求用户按回车键触发 事件函数
+                .enter      .tab
+                .delete(捕获"删除"和"退格键")
+                .esc        .space
+                .up         .down
+                .left       .right
+         -->
+        <div>
+            <h3>特殊按键字符说明</h3>
+            回车键触发：<input name="enter" type="text" v-on:keyup.enter="handler"/>
+            <br>
+            删除键触发：<input name="delete" type="text" @keyup.delete="handler" v-model="model">
+        </div>
+
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                num: 1,
+                model: ""
+            },
+            methods: {
+                addNum(){
+                    this.num++
+                },
+                addNum2(){
+                    app.num+=2
+                },
+                baidu(){
+                    console.log("点击百度的按钮")
+                },
+                handler(){
+                    console.log(app.model)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

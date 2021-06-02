@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算器练习</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 要求：输入完B之后，回车触发计算————加法操作 -->
+        数据A：<input type="text" name="num1" v-model="num1">
+        数据B：<input type="text" name="num2" v-model="num2" @keyup.enter="add">
+        总数：<span v-text="result"></span>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                num1: "",
+                num2: "",
+                result: ""
+            },
+            methods: {
+                add(){
+                    this.result=parseInt(this.num1)+parseInt(this.num2)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

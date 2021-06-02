@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue事件</title>
+</head>
+<body>
+    <div id="app">
+        <h1 v-text="num"></h1>
+        <br>
+        <button v-on:click="num++">自增1</button>
+        <!-- 简化操作 -->
+        <button @click="num++">自增2</button>
+        <!-- vue中调用函数（方法） -->
+        <button @click="addNum">方法实现自增1</button>
+        <button @click="addNum2">方法实现自增2</button>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                num: 1
+            },
+            methods: {
+                /* key:value */
+                addNum: function (){
+                    this.num++
+                },
+                /* 简化版 */
+                addNum2() {
+                    this.num += 2
+                }
+            }
+        })
+    </script>
+</body>
+</html>
