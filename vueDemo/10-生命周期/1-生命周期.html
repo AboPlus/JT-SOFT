@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>测试vue生命周期函数</title>
+</head>
+<body>
+
+<div id="app">
+    <h3 v-text="msg"></h3>
+    <button @click="destroy">销毁</button>
+</div>
+
+<!--引入js函数类库  -->
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el : "#app",
+        data : {
+            msg: "vue生命周期"
+        },
+
+        //在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
+        beforeCreate(){
+            console.log("beforeCreate")
+        },
+        //在实例创建完成后被立即调用
+        created(){
+            console.log("created")
+        },
+        //在挂载开始之前被调用：相关的 render 函数首次被调用。
+        beforeMount(){
+            console.log("beforeMount")
+        },
+        //实例被挂载后调用，这时 el 被新创建的 vm.$el 替换了。
+        mounted(){
+            console.log("mounted")
+        },
+        //数据更新时调用，发生在虚拟 DOM 打补丁之前
+        beforeUpdate(){
+            console.log("beforeUpdate")
+        },
+        //由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。
+        updated(){
+            console.log("updated")
+        },
+        //实例销毁之前调用。在这一步，实例仍然完全可用
+        beforeDestroy(){
+            console.log("beforeDestroy")
+        },
+        //实例销毁后调用。
+        destroyed(){
+            console.log("destroyed")
+        },
+        methods:{
+            destroy(){
+                this.$destroy()
+            }
+        }
+    })
+</script>
+</body>
+</html>
