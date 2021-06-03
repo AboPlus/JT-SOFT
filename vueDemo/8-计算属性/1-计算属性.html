@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性</title>
+</head>
+<body>
+    <div id="app">
+        计算：
+        <!-- 要求：将用户输入的内容进行反转
+            如：用户输入abc，页面上显示的的为cba
+         -->
+        <input type="text" v-model="msg">
+        <br>
+        {{msg}}
+        <br>
+        <!-- 1.将字符串拆分为数组 ———— split() ———— abc->[a,b,c] -->
+        {{msg.split('')}}
+        <br>
+        <!-- 2.将数组进行反转 ———— reverse() ———— [a,b,c]->[c,b,a] -->
+        {{msg.split('').reverse()}}
+        <br>
+        <!-- 3.将数组拼接为字符串 ———— join() ———— [c,b,a]->cba -->
+        {{msg.split('').reverse().join('')}}
+        <br>
+
+        <!-- 计算属性的说明：为了简化插值表达式，可以将计算的过程保存到计算属性中 -->
+        {{reverseStr}}
+        {{reverseStr}}
+        {{reverseMethod()}}
+        {{reverseMethod()}}
+
+        <!--
+            计算属性和方法的区别
+            1.计算属性有缓存的操作  只执行一次，效率更高
+            2.用户每次调用都会执行方法，没有缓存操作
+            3.计算属性调用时，只需要写属性名称   xxx()
+            4.方法调用时，需要添加方法的括号，如 xxx()
+        -->
+
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                msg: ""
+            },
+            methods: {
+                reverseMethod(){
+                    console.log("我是方法调用")
+                    return this.msg.split('').reverse().join('')
+                }
+            },
+            /* 定义计算属性 */
+            computed: {
+                /* 必须有返回值  看似是一个方法，实际调用时其实是一个属性 */
+                reverseStr(){
+                    console.log("我是计算属性")
+                    return this.msg.split('').reverse().join('')
+                }
+            }
+        })
+    </script>
+</body>
+</html>
