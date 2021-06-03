@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组案例</title>
+</head>
+<body>
+    <div id="app">
+        <!--
+        1.push() 			在最后一个追加
+        2.pop()				删除最后一个
+        3.shift()			删除第一个元素
+        4.unshift() 	在开头追加一个元素
+        5.splice()		在指定位置替换元素
+        6.sort()			数组排序  默认是按照字符编码的顺序进行排序
+        7.reverse()		数组反转
+        -->
+
+        <!-- 展现数组 -->
+        <span v-for="item in array">{{item}}   </span>
+        <br>
+        <!-- 添加数据 -->
+        数据：
+        <input type="text" v-model="num">
+        <br>
+        <button @click="push">push追加</button>
+        <button @click="pop">pop删除最后一个</button>
+        <button @click="shift">shift删除第一个</button>
+        <button @click="unshift">unshift在开头追加</button>
+        <button @click="splice">splice替换指定位置元素</button>
+        <button @click="sort">sort按照ASCII码进行排序</button>
+        <button @click="reverse">reverse数组反转</button>
+
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                /* 1.定义数组 */
+                array: [3,7,1,5,4],
+                num: ""
+            },
+            methods: {
+                push(){
+                    this.array.push(this.num)
+                },
+                pop(){
+                    this.array.pop(this.num)
+                },
+                shift(){
+                    this.array.shift(this.num)
+                },
+                unshift(){
+                    this.array.unshift(this.num)
+                },
+                splice(){
+                    //参数说明:
+                    //  1.操作数据起始位置(索引)
+                    //  2.操作数量
+                    //  3.从第三位开始就是替换元素的值(如果不写默认为空串，表示删除)，需要操作几位数就写几个数(可变参数类型...)
+                    //需求1：将第一位数字替换为5
+                    //this.array.splice(0,1,5)
+                    //需求2:将前两位数据换位 8,9
+                    //this.array.splice(0,2,8,9)
+                    //需求3：删除第四位的数据
+                    //this.array.splice(3,1,'')
+                    //需求3可以写成下面这种形式：
+                    this.array.splice(3,1)
+                },
+                sort(){
+                    this.array.sort()
+                },
+                reverse(){
+                    this.array.reverse()
+                }
+            }
+        })
+    </script>
+</body>
+</html>
