@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>侦听器</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 1.监听器学习 -->
+        姓：
+        <input type="text" v-model.lazy="firstName">
+        名：
+        <input type="text" v-model.lazy="lastName">
+        <button @click="fullNameBtn">合并</button>
+        <br>
+        全名：{{fullName}}
+        <br>
+
+        <!-- 2.过滤器 如果对数据的格式进行修改
+            如：小写转大写 日期格式转换....
+         -->
+        用户名：
+        <input type="text" v-model="username">
+        <!-- {{username | upper}} -->
+        {{username | lower | upper}}
+
+
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        /* 1.定义过滤器  过滤器要定义在Vue对象的外部 */
+        Vue.filter("upper",function (value){    //定义了一个过滤器，名字叫做upper
+            //console.log(value)
+            return value.toUpperCase()
+        })
+
+        /* 2.lambda表达式(箭头表达式)用法，全部小写
+        * lambda表达式用法：
+        * function(value){}  简写为  (value) => {}
+        * */
+        Vue.filter("lower",(value) => {
+            return value.toLowerCase()
+        })
+
+        const app = new Vue({
+            el: "#app",
+            data: {
+                firstName: "",
+                lastName: "",
+                fullName: "",
+                username: ""
+            },
+            methods: {
+                fullNameBtn(){
+                    this.fullName=this.firstName + this.lastName
+                }
+            },
+            computed: {
+
+            },
+            /* 定义监听器 */
+            watch: {
+                //当数据发生变化时则会传递数据到监听器中
+                firstName(value){
+                    this.fullName = value + this.lastName
+                },
+                lastName(value){
+                    this.fullName = this.firstName + value
+                }
+            }
+        })
+    </script>
+</body>
+</html>
