@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>axios练习</title>
+</head>
+<body>
+    <h1>Axios Ajax调用机制</h1>
+    <!-- 导入axios标签 -->
+    <script src="../js/axios.js"></script>
+    <script>
+        /* 编辑ajax请求 */
+        /* 常用请求方式的类型： get delete post put
+        * 分析：get delete 属于同种类型  ajax语法相同
+        *       put post  属于同种类型   ajax语法相同
+        *  */
+
+        /* 1.get请求
+        *   URL：http://localhost:8090/vue/getUser
+        *   返回值：List集合JSON数据
+        * */
+        axios.get("http://localhost:8090/vue/getUser")
+             .then(function (result){
+                 //result是Axios封装的promise对象
+                 //注意事项：获取服务器返回值需要通过result里面的data属性
+                 console.log(result.data)
+             })
+
+        /* 2.get带参数的请求方式 ———— ?号拼接的方式
+        *    URL：http://localhost:8090/vue/getUserById?id=1
+        *    返回值：User对象JSON串
+        *    使用场景：参数只有个别的时候使用
+        * */
+        axios.get("http://localhost:8090/vue/getUserById?id=1")
+             .then(function (result){
+                 console.log(result.data)
+             })
+
+        /* 3.get带参数的请求方式 ———— params对象方式
+        *    URL：http://localhost:8090/vue/getUserById
+        *    返回值：User对象JSON串
+        *    使用场景：参数较多的时候，可以封装params对象，简介
+        * */
+        axios.get("http://localhost:8090/vue/getUserById",{
+            params: {
+                id: 1
+            }
+        }).then((result) => {   //lamda表达式  function(result){}的简化版
+            console.log(result.data)
+        })
+
+    </script>
+</body>
+</html>
