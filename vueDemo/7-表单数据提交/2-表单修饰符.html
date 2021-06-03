@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单数据提交</title>
+</head>
+<body>
+    <div id="app">
+        请输入数值：
+        <!-- 通过number属性，强制转换为数值类型 -->
+        <!--
+            type=number 表示只能输入数值类型
+            v-model.number="num"   表示js转化为number类型
+        -->
+        <input type="text" v-model.number="num">
+        <br>
+        <button @click="addNum">计算</button>
+        <br>
+
+        <!-- 去除空格操作
+         v-model.trim  去除开头结尾的空格
+         -->
+        用户名：
+        <input type="text" v-model.trim="username">
+        <button @click="nameSize">长度</button>
+        {{length}}
+        <br>
+
+        <!-- 懒加载方式
+         v-model.lazy  当用户输入完成之后，失去焦点时才会触发
+         -->
+        <input type="text" v-model.lazy="msg">
+        {{msg}}
+
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                num: "",
+                username: "",
+                length: 0,
+                msg: ""
+            },
+            methods: {
+                addNum(){
+                    this.num += 20
+                },
+                nameSize(){
+                    this.length = this.username.length
+                }
+            }
+        })
+    </script>
+</body>
+</html>
