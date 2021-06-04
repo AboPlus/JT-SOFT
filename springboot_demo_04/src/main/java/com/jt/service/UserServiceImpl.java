@@ -6,6 +6,8 @@ import com.jt.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,6 +29,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getUserById(Integer id) {
         return userMapper.selectById(id);
+    }
+
+    @Override
+    public void deleteUserById(Integer id) {
+        userMapper.deleteById(id);
     }
 
 

@@ -3,11 +3,10 @@ package com.jt.controller;
 import com.jt.pojo.User;
 import com.jt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpRequest;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController //返回值是JSON数据
@@ -49,4 +48,26 @@ public class UserController {
     public User getUserById(Integer id){
         return userService.getUserById(id);
     }
+
+    @GetMapping("/user/{id}")
+    public User getUser(@PathVariable Integer id){
+        return userService.getUserById(id);
+    }
+
+    /**
+     * 根据ID删除user对象
+     * URL:http://localhost:8090/vue/deleteUserById
+     */
+    @DeleteMapping("/deleteUserById")
+    public String deleteUserById(Integer id){
+        userService.deleteUserById(id);
+        return "数据删除成功";
+    }
+
+    @DeleteMapping("/user/{id}")
+    public String deleteUser(@PathVariable Integer id){
+        userService.deleteUserById(id);
+        return "删除成功！！";
+    }
+
 }

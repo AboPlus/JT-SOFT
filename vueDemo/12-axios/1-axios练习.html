@@ -49,6 +49,34 @@
             console.log(result.data)
         })
 
+        /*  利用restFul风格实现数据传参
+        *   restFul：
+        *       1.参数间使用/分隔
+        *       2.url中不能出现动词
+        *  */
+        axios.get("http://localhost:8090/vue/user/1")
+             .then( result => {     //result外面的括号也能省略 ———— lamda表达式
+                 console.log(result.data)
+             })
+
+        /* 删除操作  用法与get一致 */
+        axios.delete("http://localhost:8090/vue/deleteUserById?id=234")
+             .then(result=>{
+                 console.log(result.data)
+             })
+
+        axios.delete("http://localhost:8090/vue/user/227")
+             .then(result => {
+                 console.log(result.data)
+             })
+
+
+
+
+
+
+
+
     </script>
 </body>
 </html>
