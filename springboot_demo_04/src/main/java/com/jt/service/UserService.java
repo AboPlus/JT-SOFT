@@ -17,4 +17,8 @@ public interface UserService {
 
 
     void deleteUserById(Integer id);
+
+    void addUser(User user);
+
+    void updateUser(User user);
 }

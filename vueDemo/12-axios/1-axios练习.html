@@ -70,12 +70,49 @@
                  console.log(result.data)
              })
 
+        /*
+        * 请求类型：post/put
+        *   1.对象方式提交
+        *       url:localhost:8090/addUser
+        * */
+        axios.post("http://localhost:8090/vue/addUsers",{
+            name: "张三",
+            age: 18,
+            sex: "男"
+        }).then(result => {
+            console.log(result.data)
+        })
 
+        /*
+        * axios利用form表单提交数据
+        * */
+        //1.定义表单对象并赋值
+        let params = new URLSearchParams();
+        params.append("name","李四")
+        params.append("age",16)
+        params.append("sex","女")
+        //2.发起ajax请求
+        axios.post("http://localhost:8090/vue/addUserForm",params)
+             .then(result=> {
+                 console.log(result.data)
+             })
 
+        /**
+         * 3.restFul方式实现表单数据提交
+         */
+        axios.post("http://localhost:8090/vue/user/王五/24/男")
+             .then(result => {
+                 console.log(result.data)
+             })
 
-
-
-
+        /**
+         * Put请求
+         * 需求：修改id=196的name="文殊菩萨"  要求使用restFul
+         */
+        axios.put("http://localhost:8090/vue/user/196/文殊菩萨")
+             .then(result  => {
+                 console.log(result.data)
+             })
 
     </script>
 </body>

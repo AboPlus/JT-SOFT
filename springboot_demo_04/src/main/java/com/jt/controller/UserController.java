@@ -70,4 +70,34 @@ public class UserController {
         return "删除成功！！";
     }
 
+    /**
+     * 接收post请求
+     * URL：http://localhost:8090/vue/addUser
+     * 传递的参数是一个JSON串 ———— {name: "张三", age: 18, sex: "男"}
+     * 解决方案：可以将JSON数据根据 key:value 转化为对象 ———— @RequestBody(要求对象拥有get/set方法)
+     */
+    @PostMapping("/addUsers")
+    public String addUser(@RequestBody User user){
+        userService.addUser(user);
+        return "新增用户成功";
+    }
+
+    @PostMapping("/addUserForm")
+    public String addUserForm(User user){
+        userService.addUser(user);
+        return "from表单新增用户成功";
+    }
+
+    @PostMapping("/user/{name}/{age}/{sex}")
+    public String addUserRestFul(User user){
+        userService.addUser(user);
+        return "restFull风格新增用户成功";
+    }
+
+    @PutMapping("/user/{id}/{name}")
+    public String updateUser(User user){
+        userService.updateUser(user);
+        return "修改用户信息成功";
+    }
+
 }
