@@ -100,4 +100,14 @@ public class UserController {
         return "修改用户信息成功";
     }
 
+    /**
+     * 实现修改操作
+     * 参数：user的JSON数据
+     */
+    @PutMapping("/updateUser")
+    public String updateUserInfo(@RequestBody User user){
+        userService.updateById(user);
+        return "修改用户信息成功!!";
+    }
+
 }

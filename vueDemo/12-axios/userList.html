@@ -4,26 +4,37 @@
     <meta charset="UTF-8">
     <title>用户列表展现</title>
 
-    <script src="js/jquery-3.6.0.min.js"></script>
 
 </head>
 <body>
     <div id="app">
+        <div align="center">
+            ID：<input type="text" disabled v-model="user.id">
+            名称：<input type="text" v-model="user.name">
+            年龄：<input type="text" v-model="user.age">
+            性别：<input type="text" v-model="user.sex">
+            <button @click="updateUser">确认修改</button>
+        </div>
         <table id="tab1" border="1px" width="500px" align="center">
             <tr>
-                <td colspan="4" align="center"><h1>表格数据</h1></td>
+                <td colspan="5" align="center"><h1>表格数据</h1></td>
             </tr>
             <tr align="center">
                 <td>ID</td>
                 <td>名称</td>
                 <td>年龄</td>
                 <td>性别</td>
+                <td>操作</td>
             </tr>
-            <tr v-for="item in userList">
+            <tr align="center" v-for="item in userList">
                 <td v-text="item.id"></td>
                 <td v-text="item.name"></td>
                 <td v-text="item.age"></td>
                 <td v-text="item.sex"></td>
+                <td>
+                    <button @click="updateUserBtn(item)">修改</button>
+                    <button v-on:click="deleteUser(item.id)">删除</button>
+                </td>
             </tr>
         </table>
     </div>
@@ -41,7 +52,13 @@
         const app = new Vue({
             el: "#app",
             data: {
-                userList: []
+                userList: [],
+                user: {
+                    id: "",
+                    name: "",
+                    age: "",
+                    sex: ""
+                }
             },
             methods: {
                 getUserList(){
@@ -52,6 +69,26 @@
                              this.userList = result.data
                              //console.log(this.userList)
                          })
+                },
+                deleteUser(id){
+                    //console.log(id)
+                    axios.delete("/user/"+id)
+                         .then(result => {
+                             //删除成功之后，重新加载列表信息
+                             this.getUserList()
+                         })
+                },
+                updateUserBtn(item){
+                    //console.log(item)
+                    this.user = item
+                    //console.log(this.user)
+                },
+                updateUser(){
+                    axios.put("/updateUser/",this.user)
+                         .then(result => {
+                             this.getUserList()
+                         })
+                    //console.log(this.user)
                 }
             },
             mounted(){
@@ -60,7 +97,6 @@
             }
         })
     </script>
-
 
 </body>
 </html>

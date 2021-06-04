@@ -46,5 +46,10 @@ public class UserServiceImpl implements UserService{
         userMapper.updateById(user);
     }
 
+    @Override
+    public void updateById(User user) {
+        userMapper.updateById(user);
+    }
+
 
 }
