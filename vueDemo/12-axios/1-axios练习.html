@@ -9,6 +9,7 @@
     <!-- 导入axios标签 -->
     <script src="../js/axios.js"></script>
     <script>
+
         /* 编辑ajax请求 */
         /* 常用请求方式的类型： get delete post put
         * 分析：get delete 属于同种类型  ajax语法相同
@@ -113,6 +114,16 @@
              .then(result  => {
                  console.log(result.data)
              })
+
+        /* 设定基本的URL地址 */
+        axios.defaults.baseURL = "http://localhost:8090/vue"
+
+        axios.put("/user/196/文殊菩萨2")
+            .then(result  => {
+                console.log("简化url")
+                console.log(result.data)
+            })
+
 
     </script>
 </body>

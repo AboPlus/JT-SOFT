@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表展现</title>
+
+    <script src="js/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <table id="tab1" border="1px" width="500px" align="center">
+            <tr>
+                <td colspan="4" align="center"><h1>表格数据</h1></td>
+            </tr>
+            <tr align="center">
+                <td>ID</td>
+                <td>名称</td>
+                <td>年龄</td>
+                <td>性别</td>
+            </tr>
+            <tr v-for="item in userList">
+                <td v-text="item.id"></td>
+                <td v-text="item.name"></td>
+                <td v-text="item.age"></td>
+                <td v-text="item.sex"></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 1.导入vue.js -->
+    <script src="../js/vue.js"></script>
+    <!-- 2.导入axios.js -->
+    <script src="../js/axios.js"></script>
+
+    <script>
+        /* 定义通用url */
+        axios.defaults.baseURL = "http://localhost:8090/vue"
+
+        /* 需求1:：刷新页面之后，自动的发起ajax请求 */
+        const app = new Vue({
+            el: "#app",
+            data: {
+                userList: []
+            },
+            methods: {
+                getUserList(){
+                    //console.log("方法调用！！！")
+                    axios.get("/getUser")
+                         .then(result => {
+                             //console.log(result.data)
+                             this.userList = result.data
+                             //console.log(this.userList)
+                         })
+                }
+            },
+            mounted(){
+                console.log("mounted函数被调用")
+                this.getUserList()
+            }
+        })
+    </script>
+
+
+</body>
+</html>
