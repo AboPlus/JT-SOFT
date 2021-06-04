@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表展现</title>
+
+
+</head>
+<body>
+    <div id="app">
+        <div align="center">
+            ID:<input type="text" disabled v-model="user.id">
+            姓名:<input type="text" v-model="user.name">
+            年龄:<input type="text" v-model="user.age">
+            性别:<input type="text" v-model="user.sex">
+            <button @click="updateUser">确认修改</button>
+        </div>
+        <table border="1px" align="center" width="600px">
+            <tr align="center"><td colspan="4">用户信息</td></tr>
+            <tr align="center">
+                <td>ID</td>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>性别</td>
+                <td>操作</td>
+            </tr>
+            <tr align="center" v-for="item in userList">
+                <td v-text="item.id"></td>
+                <td v-text="item.name"></td>
+                <td v-text="item.age"></td>
+                <td v-text="item.sex"></td>
+                <td>
+                    <button @click="updateUserBtn(item)">修改</button>
+                    <button @click="deleteUser(item.id)">删除</button>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script src="../js/axios.js"></script>
+    <script>
+        axios.defaults.baseURL="http://localhost:8090/vue/"
+        const app = new Vue({
+            el: "#app",
+            data: {
+                userList: [],
+                user: {
+                    id: "",
+                    name: "",
+                    age: "",
+                    sex: ""
+                }
+            },
+            methods: {
+                getUserList() {
+                    axios.get("/getUser/").then(result=>{
+                        //console.log(result.data)
+                        this.userList=result.data
+                    })
+                },
+                deleteUser(id){
+                    axios.delete("user/"+id).then(result=>{
+                        this.getUserList()
+                    })
+                },
+                updateUserBtn(item){
+                    this.user = item
+                },
+                updateUser(){
+                    axios.put("/updateUser/",this.user).then(result=>{
+                        this.getUserList()
+                    })
+                }
+            },
+            mounted(){
+                this.getUserList()
+            }
+        })
+    </script>
+</body>
+</html>
