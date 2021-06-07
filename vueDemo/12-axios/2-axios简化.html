@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>axios简化</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Axios简化</h1>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script src="../js/axios.js"></script>
+    <script>
+        /* 实现get请求获取参数  参数 id=1
+        * 方式1： url?id=1
+        * 方式2： url/1
+        * 方式3： url,{params....}
+        *  */
+
+        /*axios.get("http://localhost:8090/vue/getUserById",{
+            params: {
+                id: 1
+            }}).then(result=>{
+                console.log(result.data)
+        })*/
+
+        //函数定义
+        async function getUser(){
+            /* 之前通过then的方式接受返回值的结果，现在通过await可以直接获取返回值 */
+            const result = await axios.get("http://localhost:8090/vue/getUserById",{
+                params: {
+                    id: 1
+                }
+            })
+            console.log("Axios的简化操作")
+            console.log(result)
+            console.log(result.data)
+        }
+
+        // 结构赋值操作  想直接获取返回值结果
+        async function getUser2(){
+            //data是promise中的属性  result是data的value中
+            /*  解释：
+            * axios.get("http://localhost:8090/vue/getUserById",{params: {id: 1})得到的值就是promise对象，
+            * 而data是这个对象中的其中一个属性，
+            * 最终将promise中的data属性的值赋值给result
+            * 多个参数中间用逗号间隔
+            * */
+            const {data: result,status: code} = await axios.get("http://localhost:8090/vue/getUserById",{
+                params: {
+                    id: 1
+                }
+            })
+            console.log("解构赋值")
+            console.log(result)
+            console.log("状态码是："+code)
+        }
+
+        //函数调用
+        getUser()
+        getUser2()
+
+    </script>
+</body>
+</html>
