@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件化</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 4. 通过组件的名称利用标签进行调用 -->
+        <add-num-component></add-num-component>
+        <add-num-component></add-num-component>
+        <add-num-component></add-num-component>
+    </div>
+
+    <!-- 3.定义html模板 -->
+    <template id="addNumTem">
+        <!-- 必须有根标签！！！ -->
+        <div>
+            <h1>定义组件</h1>
+            <h3>数值：{{num}}</h3>
+            <button @click="addNum">自增</button>
+        </div>
+    </template>
+
+
+    <!-- 1.导入vue.js -->
+    <script src="../js/vue.js"></script>
+    <!-- 2.定义组件 -->
+    <script>
+        //2.1 创建组件
+        Vue.component('addNumComponent',{
+            //2.2 定义组件内部结构
+            data(){
+                return {
+                    num: 0
+                }
+            },
+            /**
+             * 2.3 定义组件的标签体
+             * 方式1：字符串拼接
+             * 方式2：ES6 模板字符串写法 -- 块级作用域 通过反引号``实现（``内部都会被当做字符串处理，无需手动拼接）
+             * 方式3：template模板语法
+             */
+            //template: '<div>{{num}}<button @click="addNum"></button></div>'
+            /*template: `
+                    <table>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </table>
+            `*/
+            template: "#addNumTem",
+            methods: {
+                addNum(){
+                    this.num++
+                }
+            }
+        })
+
+        // 3.定义Vue对象
+        const app = new Vue({
+            el: "#app",
+
+        })
+    </script>
+</body>
+</html>
