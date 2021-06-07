@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件化</title>
+</head>
+<body>
+<div id="app">
+    <home></home>
+    <dog></dog>
+</div>
+
+<!-- 1.定义home标签 -->
+<template id="homeTem">
+    <div>
+        <h3>{{name}}</h3>
+    </div>
+</template>
+<!-- 2.定义dog标签 -->
+<template id="dogTem">
+    <div>
+        <h3>{{name}}</h3>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    // 2.定义组件对象
+    let home = {
+        data(){
+            return{
+                name: "这里是家"
+            }
+        },
+        //3.准备模板标签
+        template: '#homeTem'
+    }
+
+    let dog = {
+        data(){
+            return {
+                name: "哈士奇拆家狂魔"
+            }
+        },
+        template: '#dogTem'
+    }
+
+
+    const app = new Vue({
+        el: "#app",
+        components: {
+            // 1.定义home组件
+            home,
+            dog
+        }
+    })
+</script>
+</body>
+</html>
