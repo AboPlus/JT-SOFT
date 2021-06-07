@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>组件化</title>
+    <title>局部组件嵌套</title>
 </head>
 <body>
 <div id="app">
     <home></home>
-    <dog></dog>
 </div>
 
 <!-- 1.定义home标签 -->
 <template id="homeTem">
     <div>
         <h3>{{name}}</h3>
+        <dog></dog>
     </div>
 </template>
 <!-- 2.定义dog标签 -->
@@ -27,16 +27,6 @@
 
 <script>
     // 2.定义组件对象
-    let home = {
-        data(){
-            return{
-                name: "这里是家"
-            }
-        },
-        //3.准备模板标签
-        template: '#homeTem'
-    }
-
     let dog = {
         data(){
             return {
@@ -45,7 +35,19 @@
         },
         template: '#dogTem'
     }
-
+    let home = {
+        data(){
+            return{
+                name: "这里是家"
+            }
+        },
+        //3.准备模板标签
+        template: '#homeTem',
+        //在home中引用局部组件,必须先声明再引用
+        components: {
+            dog
+        }
+    }
 
     const app = new Vue({
         el: "#app",
