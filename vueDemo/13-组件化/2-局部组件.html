@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件化</title>
+</head>
+<body>
+<div id="app">
+    <hello1-com></hello1-com>
+    <person-com></person-com>
+    <hello3-com></hello3-com>
+</div>
+
+<!-- 定义第一个组件 -->
+<template id="helloTem1">
+    <div>
+        <h3>{{msg}}</h3>
+    </div>
+</template>
+<!-- 定义第二个组件 -->
+<template id="personTem">
+    <div>
+        <h3>{{msg}}</h3>
+    </div>
+</template>
+<!-- 定义第三个组件 -->
+<template id="hello3Tem">
+    <div>
+        <h3>{{msg}}</h3>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    //定义全局组件
+    Vue.component("hello3Com",{
+        data(){
+            return{
+                msg: "你好Hello3"
+            }
+        },
+        template: '#hello3Tem'
+    })
+
+
+    //1.定义对象
+    let hello1 = {
+        data(){
+            return {
+                msg: "你好Hello1"
+            }
+        },
+        template: '#helloTem1'
+    }
+    let personCom = {
+        data(){
+            return {
+                msg: "我是中国人"
+            }
+        },
+        template: '#personTem'
+    }
+
+    const app = new Vue({
+        el: "#app",
+        //定义局部组件，只能在当前元素中使用(指只能在#app 里面使用)
+        components: {
+            //key(组件名称) : value(组件内容)
+            hello1Com: hello1,
+            //personCom: personCom,
+            //如果key和value的值相同，则简化为key即可
+            personCom
+        }
+    })
+</script>
+</body>
+</html>
