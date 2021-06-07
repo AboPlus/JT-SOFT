@@ -60,6 +60,28 @@
         getUser()
         getUser2()
 
+        /*
+        * 解构赋值优势 -- 解决回调地狱问题
+        * */
+       /* $.get("url",function (data){
+            $.get("url2",function (data2){
+
+            })
+        })
+
+        axios.get("url")
+             .then(result =>{
+                 axios.get("url2")
+                      .then(result2 => {
+
+                      })
+             })
+
+        async function aa(){
+            const {data: result1} = await axios.get("url")
+            const {data: result2} = axios.get("url2",result1)
+        }*/
+
     </script>
 </body>
 </html>
