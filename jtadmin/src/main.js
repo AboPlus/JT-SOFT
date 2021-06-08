@@ -1,3 +1,10 @@
+/*
+* 个人总结：
+        1.import...from...的from命令后面可以跟很多路径格式，若只给出vue，axios这样的包名，
+            则会自动到node_modules中加载；若给出相对路径及文件前缀，则到指定位置寻找。
+        2.可以加载各种各样的文件：.js、.vue、.less等等。
+        3.可以省略掉from直接引入。
+* */
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -32,8 +39,13 @@ Vue.use(VueQuillEditor)
 
 
 new Vue({
-  // Vue对象引入路由机制
+  // Vue对象引入路由机制，
   router,
   // 指定位置渲染的动作 App.vue中进行渲染
+    /*
+    * render函数是vue通过js渲染dom结构的函数createElement，约定可以简写为h
+    * 即h就是createElement函数
+    * $mount(’#app’) ：手动挂载到id为app的dom中的意思
+    * */
   render: h => h(App)
 }).$mount('#app')
