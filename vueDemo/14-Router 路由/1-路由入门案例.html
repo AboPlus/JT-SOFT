@@ -13,7 +13,7 @@
             2.to 在解析之后，形成href=属性，实现页面跳转
      -->
     <a href="http://www.baidu.com">百度</a><hr>
-    <router-link to="/user">用户</router-link>
+    <router-link to="/home">用户</router-link>
     <router-link to="/dog">狗</router-link>
 
     <!-- 3.一般需要在当前页面中展现新组建的内容(html) 提前设定展现位 可以当做占位符理解 -->
@@ -58,7 +58,11 @@
     *  */
     const router = new VueRouter({
         routes: [
-            {path: '/user',component: homeCom},
+            /* path:'/' 就是页面渲染完成后的根目录
+            * {path: '/', redirect: '/user'}即页面渲染完成后就重定向到/user
+            *  */
+            {path: '/', redirect: '/home'},
+            {path: '/home',component: homeCom},
             {path: '/dog',component: dogCom}
         ]
     })
