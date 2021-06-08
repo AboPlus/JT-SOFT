@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>路由入门案例</title>
+</head>
+<body>
+<div id="app">
+
+    <!-- 2.定义路由请求地址
+        Vue中默认添加路由规则
+            1.router-link 在解析之后形成<a>标签
+            2.to 在解析之后，形成href=属性，实现页面跳转
+     -->
+    <a href="http://www.baidu.com">百度</a><hr>
+    <router-link to="/user">用户</router-link>
+    <router-link to="/dog">狗</router-link>
+
+    <!-- 3.一般需要在当前页面中展现新组建的内容(html) 提前设定展现位 可以当做占位符理解 -->
+    <router-view></router-view>
+
+</div>
+
+<!-- 5.定义home模板 -->
+<template id="homeTem">
+    <div>
+        <h1>
+            这里是家
+        </h1>
+    </div>
+</template>
+<template id="dogTem">
+    <div>
+        <h1>
+            这是一只哈士奇
+        </h1>
+    </div>
+</template>
+
+<!-- 1.导入JS注意顺序，先导入vue.js 再导入vue-router.js -->
+<!--引入js函数类库  -->
+<script src="../js/vue.js"></script>
+<!-- 引入路由规则 -->
+<script src="../js/vue-router.js"></script>
+<script>
+    //4.定义组件变量
+    let homeCom = {
+        template: '#homeTem'
+    }
+    let dogCom = {
+        template: '#dogTem'
+    }
+
+    /* 6.实现请求与路由的绑定 定义路由对象
+    * routes: 是一个数组的结构，数组中包含对象的结构
+    * path: 拦截请求的路径名
+    * component： 组件名称
+    *  */
+    const router = new VueRouter({
+        routes: [
+            {path: '/user',component: homeCom},
+            {path: '/dog',component: dogCom}
+        ]
+    })
+
+    /* 7.将路由对象与Vue实例进行绑定 */
+    const app = new Vue({
+        el: "#app",
+        //router: router
+        router
+    })
+</script>
+</body>
+</html>
