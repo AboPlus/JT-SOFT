@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>关于全局组件和局部组件的关系</title>
+</head>
+<body>
+<!-- 规则：
+    1.全局组件 在组件的任意的位置都可以调用
+    2.局部组件 局部组件只能在指定的对象（组件）中进行调用
+ -->
+<div id="app">
+    <aaa></aaa>
+    <bbb></bbb>
+</div>
+
+<!-- 定义全剧组件模板 -->
+<template id="aaaTem">
+    <div>
+        <h1>{{msg}}</h1>
+        <!-- 局部组件不能被全局组件调用 -->
+        <!-- <bbb></bbb> -->
+    </div>
+</template>
+
+<!-- 定义局部组件模板 -->
+<template id="bbbTem">
+    <div>
+        <h1>{{msg}}</h1>
+        <!-- 引用全局组件aaa -->
+        <!-- 全局组件可以被局部组件调用 -->
+        <p>引用</p>
+        <aaa></aaa>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    Vue.component("aaa",{
+        data(){
+            return {
+                msg: "我是全局组件"
+            }
+        },
+        template: '#aaaTem'
+    })
+
+    let bbb = {
+        data(){
+            return {
+                msg: "我是局部组件"
+            }
+        },
+        template: "#bbbTem"
+    }
+
+    const app = new Vue({
+        el: "#app",
+        components: {
+            //局部组件的名称 : 组件的内容
+            bbb
+        }
+    })
+
+</script>
+</body>
+</html>
