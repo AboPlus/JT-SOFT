@@ -15,6 +15,7 @@
     <a href="http://www.baidu.com">百度</a><hr>
     <router-link to="/home">用户</router-link>
     <router-link to="/dog">狗</router-link>
+    <router-link to="/zoo">动物园</router-link>
 
     <!-- 3.一般需要在当前页面中展现新组建的内容(html) 提前设定展现位 可以当做占位符理解 -->
     <router-view></router-view>
@@ -36,6 +37,33 @@
         </h1>
     </div>
 </template>
+<template id="zooTem">
+    <div>
+        <h1>
+            这是动物园
+        </h1>
+        <!-- 嵌套拥有父子级关系，路径需要展现出父子级关系  "/zoo/lion" -->
+        <router-link to="/zoo/lion">狮子</router-link>
+        <router-link to="/zoo/tiger">老虎</router-link>
+        <!-- 设定路由占位符 -->
+        <router-view></router-view>
+    </div>
+</template>
+
+<template id="lionTem">
+    <div>
+        <h1>
+            这是一只小狮子
+        </h1>
+    </div>
+</template>
+<template id="tigerTem">
+    <div>
+        <h1>
+            这是一只小老虎
+        </h1>
+    </div>
+</template>
 
 <!-- 1.导入JS注意顺序，先导入vue.js 再导入vue-router.js -->
 <!--引入js函数类库  -->
@@ -50,6 +78,15 @@
     let dogCom = {
         template: '#dogTem'
     }
+    let zooCom = {
+        template: '#zooTem'
+    }
+    let lionCom = {
+        template: '#lionTem'
+    }
+    let tigerCom = {
+        template: '#tigerTem'
+    }
 
     /* 6.实现请求与路由的绑定 定义路由对象
     * routes: 是一个数组的结构，数组中包含对象的结构
@@ -63,7 +100,14 @@
             *  */
             {path: '/', redirect: '/home'},
             {path: '/home',component: homeCom},
-            {path: '/dog',component: dogCom}
+            {path: '/dog',component: dogCom},
+            {path: '/zoo',component: zooCom,
+                children: [   //父子级关系关键字 ： children
+                    {path: '/zoo/lion',component: lionCom},
+                    {path: '/zoo/tiger',component: tigerCom}
+                ]},
+            /*{path: '/zoo/lion',component: lionCom},
+            {path: '/zoo/tiger',component: tigerCom}*/
         ]
     })
 
