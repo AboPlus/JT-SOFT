@@ -37,11 +37,6 @@ public class UserController {
     public SysResult login(@RequestBody User user){
         //执行后端登录操作，要求返回token密钥
         String token = userService.login(user);
-        if (StringUtils.hasLength(token)){
-            return SysResult.success(token);
-        }else {
-            // 登录失败
-            return SysResult.fail();
-        }
+        return StringUtils.hasLength(token) ? SysResult.success(token) : SysResult.fail();
     }
 }
