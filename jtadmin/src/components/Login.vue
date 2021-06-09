@@ -1,34 +1,38 @@
 <!-- 定义模版对象 -->
 <template>
-    <div class="login_container">
-      <div class="login_box">
-        <!-- 头像区域-->
-        <div class="avatar_box">
-          <img src="../assets/logo.png" alt="VUE图片" />
-        </div>
-
-        <!-- 登陆表单区域
-              ref代表当前表单引用对象
-             :model 是表格中封装的对象
-        -->
-        <el-form ref="loginFormRef" label-width="0" class="login_form" :model="loginForm" :rules="rules" >
-          <el-form-item prop="username">
-            <el-input  prefix-icon="iconfont iconuser" v-model="loginForm.username"></el-input>
-          </el-form-item>
-          <el-form-item prop="password">
-            <el-input  prefix-icon="iconfont iconsuo" type="password" v-model="loginForm.password"></el-input>
-          </el-form-item>
-          <el-form-item class="btns">
-             <el-button type="primary" @click="login">登录</el-button>
-              <el-button type="info" @click="resetBtn">重置</el-button>
-          </el-form-item>
-        </el-form>
+  <div class="login_container">
+    <div class="login_box">
+      <!-- 头像区域-->
+      <div class="avatar_box">
+        <img src="../assets/logo.png" alt="VUE图片" />
       </div>
+
+      <!-- 登陆表单区域
+            ref代表当前表单引用对象,之后form表单可以通过ref进行引用
+           :model 是表格中封装的对象
+           :rules 对整个表单进行数据校验
+      -->
+      <el-form ref="loginFormRef" label-width="0" class="login_form"  :model="loginForm" :rules="rules">
+        <!-- prop 表示需要校验的字段名 -->
+        <el-form-item prop="username">
+          <!-- prefix-icon 表示小图标 -->
+          <el-input  prefix-icon="iconfont iconuser" v-model="loginForm.username"></el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input  prefix-icon="iconfont iconsuo" type="password" v-model="loginForm.password"></el-input>
+        </el-form-item>
+        <el-form-item class="btns">
+          <el-button type="primary" round @click="loginBtn">登录</el-button>
+          <el-button type="info" round @click="resetBtn">重置</el-button>
+        </el-form-item>
+      </el-form>
     </div>
+  </div>
 </template>
 
 <!-- 定义JS变量 -->
 <script>
+/* export 对外声明自己的属性信息 */
 export default {
   data(){
     return {
@@ -36,46 +40,47 @@ export default {
         username: '',
         password: ''
       },
-      //定义表单的验证规则
       rules: {
-         //定义校验用户名
-         username: [
+        username: [
+          /*
+          required 是否为必填项,true表示是必填项
+          message 提示信息
+          trigger 触发条件，blur表示离焦触发
+          */
           { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 3, max:30, message: '长度在 3 到 30 个字符', trigger: 'blur' }
-         ],
-         //定义校验密码
-         password: [
+          { min: 3, max: 30, message: '长度在 3 到 30 个字符', trigger: 'blur' }
+        ],
+        password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { min: 3, max:30, message: '长度在 3 到 30 个字符', trigger: 'blur' }
-         ]
+          { min: 3, max: 30, message: '长度在 3 到 30 个字符', trigger: 'blur' }
+        ]
+
       }
     }
   },
   methods: {
     resetBtn(){
-      //this对象代表当前组件对象
-      //console.log(this)
-      //实现数据重置
+      //alert("点击生效")
+      /* this.loginForm.username = '',
+      this.loginForm.password = '' */
+      /* console.log(this)
+            this代表当前的Vue组件对象(是组件对象，不是Vue对象)
+            $ 表示从vue对象中获取数据
+            $refs 表示从vue组建中获取当前vue对象中的全部ref属性
+            resetFields() 对整个表单进行重置，将所有字段值重置为初始值并移除校验结果
+      */
       this.$refs.loginFormRef.resetFields()
     },
-    login(){
-      //获取表单对象之后进行数据校验
-      //valid 表示校验的结果 true表示通过  false表示失败
-      this.$refs.loginFormRef.validate(async valid => {
-         //如果没有完成校验则直接返回
-         if(!valid) return
+    loginBtn(){
+      // alert("登录点击生效")
+      // 获取表单数据
+      this.$refs.loginFormRef.validate(valid=>{
+        // alert(valid)  //返回值为 true或者false
+        // 2.当程序没有通过校验时，程序终止 -- 直接return就是终止程序
+        if(!valid) return
 
-         //如果校验成功,则发起ajax请求
-        const {data: result} = await this.$http.post('/user/login',this.loginForm)
-        if(result.status !== 200) return this.$message.error("用户登录失败")
-        this.$message.success("用户登陆成功")
+        alert("校验通过")
 
-        //获取用户token信息
-        let token = result.data
-        window.sessionStorage.setItem("token",token)
-
-        //用户登录成功之后,跳转到home页面
-        this.$router.push("/home")
       })
     }
   }
