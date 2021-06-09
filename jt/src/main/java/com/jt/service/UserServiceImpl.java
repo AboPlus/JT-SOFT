@@ -39,6 +39,7 @@ public class UserServiceImpl implements UserService{
     public String login(User user) {
         String password = user.getPassword();
         //md5hash加密 相对于 md5加密更加"安全"
+        //getBytes() -- 使用平台的默认字符集将字符串编码为 byte 序列，并将结果存储到一个新的 byte 数组中
         String md5Password = DigestUtils.md5DigestAsHex(password.getBytes());
         user.setPassword(md5Password);
         // 根据其中补位null的数据当做where条件 u/p
