@@ -74,13 +74,17 @@ export default {
     loginBtn(){
       // alert("登录点击生效")
       // 获取表单数据
-      this.$refs.loginFormRef.validate(valid=>{
+      this.$refs.loginFormRef.validate(async valid=>{
         // alert(valid)  //返回值为 true或者false
         // 2.当程序没有通过校验时，程序终止 -- 直接return就是终止程序
         if(!valid) return
 
-        alert("校验通过")
+        //alert("校验通过")
 
+        //3.发起ajax请求，实现业务调用
+        // 已经向vue对象中添加全局对象，this.$http就是axios的全局用法  this指的是Login组件
+        let {data: result} = await this.$http.post("user/login",this.loginForm)
+        console.log(result)
       })
     }
   }
