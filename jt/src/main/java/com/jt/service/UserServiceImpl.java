@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService{
         return userMapper.selectList(null);
     }
 
+
     /**
      * 1.将明文转化为密文 -- MD5加密
      * 2.通过username和password查询数据库
@@ -45,8 +46,7 @@ public class UserServiceImpl implements UserService{
         // 根据其中补位null的数据当做where条件 u/p
         QueryWrapper<User> queryWrapper = new QueryWrapper<>(user);
         User userDB = userMapper.selectOne(queryWrapper);
-        /*
-        * randomUUID()的返回值是UUID对象，而我们声明的token是String类型，所以使用toString转化为String类型
+        /* randomUUID()的返回值是UUID对象，而我们声明的token是String类型，所以使用toString转化为String类型
         * UUID格式：7788fccd-c8ff-11eb-b2fa-4ccc6ae2fd3c  所以要把-换成空串( replace() )
         * */
         String token = UUID.randomUUID().toString().replace("-", "");

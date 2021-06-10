@@ -39,4 +39,5 @@ public class UserController {
         String token = userService.login(user);
         return StringUtils.hasLength(token) ? SysResult.success(token) : SysResult.fail();
     }
+
 }
