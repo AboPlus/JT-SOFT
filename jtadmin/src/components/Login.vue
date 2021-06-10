@@ -12,7 +12,7 @@
            :model 是表格中封装的对象
            :rules 对整个表单进行数据校验
       -->
-      <el-form ref="loginFormRef" label-width="0" class="login_form"  :model="loginForm" :rules="rules">
+      <el-form ref="loginFormRef" label-width="0" class="login_form"  :model="loginForm" :rules="rules" @submit.native.prevent >
         <!-- prop 表示需要校验的字段名 -->
         <el-form-item prop="username">
           <!-- prefix-icon 表示小图标 -->
@@ -22,7 +22,7 @@
           <el-input  prefix-icon="iconfont iconsuo" type="password" v-model="loginForm.password"></el-input>
         </el-form-item>
         <el-form-item class="btns">
-          <el-button type="primary" round @click="loginBtn">登录</el-button>
+          <el-button type="primary" round @click="loginBtn" native-type="submit">登录</el-button>
           <el-button type="info" round @click="resetBtn">重置</el-button>
         </el-form-item>
       </el-form>
@@ -74,9 +74,13 @@ export default {
     loginBtn(){
       // alert("登录点击生效")
       // 获取表单数据
+      /* validate()
+      对整个表单进行校验的方法，参数为一个回调函数。该回调函数会在校验结束后被调用，
+      并传入两个参数：是否校验成功和未通过校验的字段。若不传入回调函数，则会返回一个 promise
+      */
       this.$refs.loginFormRef.validate(async valid=>{
         // alert(valid)  //返回值为 true或者false
-        // 2.当程序没有通过校验时，程序终止 -- 直接return就是终止程序
+        // 2.当程序没有通过校验时，程序终止，不再进行后续操作 -- 直接return就是终止程序
         if(!valid) return
 
         //alert("校验通过")
@@ -84,7 +88,28 @@ export default {
         //3.发起ajax请求，实现业务调用
         // 已经向vue对象中添加全局对象，this.$http就是axios的全局用法  this指的是Login组件
         let {data: result} = await this.$http.post("user/login",this.loginForm)
-        console.log(result)
+        //console.log(result)
+
+        //4.判断用户校验是否正常 status=200  如果不加return的话，后续操作也会继续执行
+        if(result.status !== 200) return this.$message.error("用户名或者密码错误")
+        //alert("继续执行")
+        this.$message.success("恭喜你，登录成功！")
+        // alert(result.data) //获取token
+
+        window.sessionStorage.setItem("token",result.data)// 将用户信息保存到session
+        // window.sessionStorage.removeItemItem("token") //删除单个
+        // .window.sessionStorage.clear() //全部删除
+
+        //5.登陆成功之后，跳转到/home页面中
+        /*
+            this 当前组件
+            $router 使用全局路由
+            push() 跳转
+            push("/home") 跳转到home页面
+            this.$router.push("/home") 在当前组件使用全局路由跳转到home页面
+        */
+        this.$router.push("/home")
+
       })
     }
   }
