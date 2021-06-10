@@ -11,7 +11,7 @@ import java.util.List;
  * @author 刘昱江
  * 时间 2021/2/18
  */
-@TableName
+@TableName("rights")
 @Data
 @Accessors(chain = true)
 public class Rights extends BasePojo{
