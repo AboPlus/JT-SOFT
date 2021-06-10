@@ -34,8 +34,10 @@ public class RightsServiceImpl implements RightsService{
         // 遍历list集合数据
         for (Rights rights : list) {
             QueryWrapper<Rights> queryWrapper2 = new QueryWrapper<>();
+            // 根据一级的ID，查询子级信息
             queryWrapper2.eq("parent_id", rights.getId());
             List<Rights> children = rightsMapper.selectList(queryWrapper2);
+            //将对象进行封装
             rights.setChildren(children);
         }
         return list;
