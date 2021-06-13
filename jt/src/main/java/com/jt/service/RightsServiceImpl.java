@@ -41,7 +41,9 @@ public class RightsServiceImpl implements RightsService{
             //将对象进行封装
             rights.setChildren(children);*/
             val = rights.getId();
-            if (rights.getLevel() == 2) break;
+            if (rights.getLevel() == 2) {
+                break;
+            }
             rights.setChildren(getRightsList());
         }
         val = 0;
