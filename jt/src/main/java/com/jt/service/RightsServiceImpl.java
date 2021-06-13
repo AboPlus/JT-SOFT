@@ -26,22 +26,25 @@ public class RightsServiceImpl implements RightsService{
      *  2.查询以及目录下的二级列表信息    条件parent_id = 1级ID
      * @return
      */
+    Integer val = 0;
     @Override
     public List<Rights> getRightsList() {
         QueryWrapper<Rights> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("parent_id", 0);
+        queryWrapper.eq("parent_id", val);
         List<Rights> list = rightsMapper.selectList(queryWrapper);
         // 遍历list集合数据
         for (Rights rights : list) {
-            QueryWrapper<Rights> queryWrapper2 = new QueryWrapper<>();
-            // 根据一级的ID，查询子级信息
-            queryWrapper2.eq("parent_id", rights.getId());
-            List<Rights> children = rightsMapper.selectList(queryWrapper2);
+            /*// 根据一级的ID，查询子级信息
+            queryWrapper.clear(); //清空第一轮的查询结果  否则会拼接上一轮的条件结果
+            queryWrapper.eq("parent_id", rights.getId());
+            List<Rights> children = rightsMapper.selectList(queryWrapper);
             //将对象进行封装
-            rights.setChildren(children);
+            rights.setChildren(children);*/
+            val = rights.getId();
+            if (rights.getLevel() == 2) break;
+            rights.setChildren(getRightsList());
         }
+        val = 0;
         return list;
     }
-
-
 }

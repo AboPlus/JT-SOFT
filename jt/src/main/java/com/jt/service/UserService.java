@@ -1,6 +1,8 @@
 package com.jt.service;
 
 import com.jt.pojo.User;
+import com.jt.vo.PageResult;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -12,4 +14,10 @@ public interface UserService {
     List<User> findAll();
 
     String login(User user);
+
+    PageResult findUserByPage(PageResult pageResult);
+
+    void updateStatus(User user);
+
+    void deleteUserById(Integer id);
 }
