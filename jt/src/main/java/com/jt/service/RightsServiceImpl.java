@@ -23,7 +23,7 @@ public class RightsServiceImpl implements RightsService{
 
     /**
      *  1.查询一级列表信息  条件parent_id=0
-     *  2.查询以及目录下的二级列表信息    条件parent_id = 1级ID
+     *  2.查询以及目录下的二级列表信息    条件parent_id = 一级ID
      * @return
      */
     Integer val = 0;
@@ -40,10 +40,10 @@ public class RightsServiceImpl implements RightsService{
             List<Rights> children = rightsMapper.selectList(queryWrapper);
             //将对象进行封装
             rights.setChildren(children);*/
-            val = rights.getId();
             if (rights.getLevel() == 2) {
                 break;
             }
+            val = rights.getId();
             rights.setChildren(getRightsList());
         }
         val = 0;

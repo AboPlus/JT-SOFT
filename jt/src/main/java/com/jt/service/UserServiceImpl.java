@@ -50,8 +50,8 @@ public class UserServiceImpl implements UserService{
         QueryWrapper<User> queryWrapper = new QueryWrapper<>(user);
         User userDB = userMapper.selectOne(queryWrapper);
         /* randomUUID()的返回值是UUID对象，而我们声明的token是String类型，所以使用toString转化为String类型
-        * UUID格式：7788fccd-c8ff-11eb-b2fa-4ccc6ae2fd3c  所以要把-换成空串( replace() )
-        * */
+         * UUID格式：7788fccd-c8ff-11eb-b2fa-4ccc6ae2fd3c  所以要把-换成空串( replace() )
+         * */
         String token = UUID.randomUUID().toString().replace("-", "");
         return userDB==null?null:token;
     }
@@ -104,5 +104,24 @@ public class UserServiceImpl implements UserService{
         userMapper.deleteById(id);
     }
 
+    @Override
+    public boolean addUser(User user) {
+        //判断用户是否已经存在
+        String username = user.getUsername();
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", username);
+        User userDB = userMapper.selectOne(queryWrapper);
+        if (userDB != null){
+            return false;
+        }
+        //密码md5加密
+        String password = user.getPassword();
+        String md5DigestAsHex = DigestUtils.md5DigestAsHex(password.getBytes());
+        user.setPassword(md5DigestAsHex);
+        //设置用户状态
+        user.setStatus(true);
+        userMapper.insert(user);
+        return true;
+    }
 
 }

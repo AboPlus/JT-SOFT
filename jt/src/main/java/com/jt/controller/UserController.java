@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,7 +43,7 @@ public class UserController {
     }
 
     /**
-     *   也无需求：根据条件进行分页查询
+     *   业务需求：根据条件进行分页查询
      * - 请求路径: /user/list
      * - 请求类型: GET
      * - 请求参数: 后台使用PageResult对象接收
@@ -59,6 +60,7 @@ public class UserController {
     }
 
     /**
+     *   用户状态修改
      * - 请求路径 /user/status/{id}/{status}
      * - 请求类型 PUT
      * - 请求参数: 用户ID/状态值数据
@@ -70,7 +72,7 @@ public class UserController {
         return SysResult.success();
     }
 
-    /**
+    /**  用户删除
      * - 请求路径: /user/{id}
      * - 请求类型: delete
      * - 请求参数:
@@ -80,6 +82,19 @@ public class UserController {
     public SysResult deleteUserById(@PathVariable Integer id){
         userService.deleteUserById(id);
         return SysResult.success();
+    }
+
+    /**
+     *   用户新增
+     * - 请求路径 /user/addUser
+     * - 请求类型 POST
+     * - 请求参数: 整个form表单数据
+     * - 返回值结果: SysResult对象
+     */
+    @PostMapping("/addUser")
+    public SysResult addUser(@RequestBody User user){
+        boolean flag = userService.addUser(user);
+        return flag?SysResult.success():SysResult.fail();
     }
 
 }

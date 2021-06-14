@@ -2,7 +2,6 @@ package com.jt.service;
 
 import com.jt.pojo.User;
 import com.jt.vo.PageResult;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -20,4 +19,7 @@ public interface UserService {
     void updateStatus(User user);
 
     void deleteUserById(Integer id);
+
+    boolean addUser(User user);
+
 }
