@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class MybatisPlusConfig {
 
     // 最新版 编辑实例化对象，将MP分页拦截器交给Spring容器管理
+    // 直接官网复制API然后把DbType修改成自己的数据库即可（这里我使用的是MariaDB）
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
