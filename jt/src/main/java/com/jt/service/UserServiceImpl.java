@@ -136,7 +136,7 @@ public class UserServiceImpl implements UserService{
         //设置用户状态
         user.setStatus(true);
         userMapper.insert(user);
-        // int a = 1/0; 因为添加了事务，所以一旦程序出现异常，就会回滚
+        // int a = 1/0; //因为添加了事务，所以一旦程序出现异常，就会回滚
         return true;
     }
 
