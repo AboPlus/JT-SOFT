@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+// 自动填充配置类
+// 入库/更新自动填充时间
 @Component  //交给Spring容器管理，无色无味的注解
 public class MyMetaObjectHandler implements MetaObjectHandler {
     // 新增时自动填充
