@@ -24,6 +24,6 @@ public class ItemCat extends BasePojo{
     private String name;        //分类名称
     private Boolean status;     //分类状态 0 停用 1 正常
     private Integer level;      //商品分类等级  1 2 3
-    @TableField(exist = false)
+    @TableField(exist = false)  //由于自关联需要定义个属性标识关联关系，但是由于不是数据库内的字段，所以添加该注解
     private List<ItemCat> children;
 }
