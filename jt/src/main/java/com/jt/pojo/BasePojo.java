@@ -14,6 +14,6 @@ import java.util.Date;
 public class BasePojo implements Serializable{
 	@TableField(fill = FieldFill.INSERT)		//表示入库时需要赋值
 	private Date created;
-	@TableField(fill = FieldFill.INSERT_UPDATE)	//表示入库/更新时赋值.
+	@TableField(fill = FieldFill.INSERT_UPDATE)	//表示入库及更新时赋值.
 	private Date updated;
 }
