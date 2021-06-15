@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/* 全局异常处理类 */
 // 问题1：全局异常的处理 应该拦截哪一层代码？Controller 异常向上抛出，所以拦截Controller拦截的最全面
 //@Configuration
 //@ControllerAdvice + @ResponseBody
