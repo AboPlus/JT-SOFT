@@ -140,4 +140,19 @@ public class UserServiceImpl implements UserService{
         return true;
     }
 
+    @Override
+    public User selectUserById(Integer id) {
+        User user = userMapper.selectById(id);
+        return user;
+    }
+
+    @Override
+    public Boolean updateUser(User user) {
+        int i = userMapper.updateById(user);
+        if (i == 0) {
+            return false;
+        }
+        return true;
+    }
+
 }

@@ -22,4 +22,7 @@ public interface UserService {
 
     boolean addUser(User user);
 
+    User selectUserById(Integer id);
+
+    Boolean updateUser(User user);
 }

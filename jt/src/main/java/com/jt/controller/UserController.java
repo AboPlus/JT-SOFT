@@ -93,4 +93,29 @@ public class UserController {
         return flag?SysResult.success():SysResult.fail();
     }
 
+    /**
+     *   业务需求：用户修改 ———— 根据ID查询用户信息
+     * - 请求路径: /user/{id}
+     * - 请求类型: GET
+     * - 返回值: SysResult对象
+     */
+    @GetMapping("/{id}")
+    public SysResult selectUserById(@PathVariable Integer id){
+        User user = userService.selectUserById(id);
+        return user==null?SysResult.fail():SysResult.success(user);
+    }
+
+    /**
+     *   业务需求：用户修改 ———— 根据用户ID更新数据
+     * - 请求路径: /user/updateUser
+     * - 请求类型: PUT
+     * - 请求参数:id、phone、email
+     * - 返回值: SysResult对象
+     */
+    @PutMapping("/updateUser")
+    public SysResult updateUser(@RequestBody User user){
+        Boolean flag = userService.updateUser(user);
+        return flag?SysResult.success():SysResult.fail();
+    }
+
 }
