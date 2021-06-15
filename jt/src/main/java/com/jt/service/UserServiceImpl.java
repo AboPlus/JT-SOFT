@@ -149,7 +149,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public Boolean updateUser(User user) {
         int i = userMapper.updateById(user);
-        if (i == 0) {
+        if (i == 0) {   //直接点击确定也显示成功，因为updated会修改，此时i=1
             return false;
         }
         return true;
