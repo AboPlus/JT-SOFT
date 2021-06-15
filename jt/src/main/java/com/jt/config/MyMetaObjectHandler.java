@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-// 自动填充配置类
+// 自动填充配置类  参照MybatisPlus官网API配置
 // 入库/更新自动填充时间
 @Component  //交给Spring容器管理，无色无味的注解
 public class MyMetaObjectHandler implements MetaObjectHandler {
