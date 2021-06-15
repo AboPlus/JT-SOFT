@@ -12,10 +12,6 @@ import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * @author 刘昱江
- * 时间 2021/5/11
- */
 @RestController
 @CrossOrigin
 @RequestMapping("/user/")
@@ -85,7 +81,7 @@ public class UserController {
     }
 
     /**
-     *   用户新增
+     *   业务需求：实现用户新增
      * - 请求路径 /user/addUser
      * - 请求类型 POST
      * - 请求参数: 整个form表单数据

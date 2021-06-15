@@ -8,6 +8,7 @@ import com.jt.pojo.User;
 import com.jt.vo.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 
@@ -95,16 +96,30 @@ public class UserServiceImpl implements UserService{
 
     // user:{id:xxx,status:true/false}
     @Override
+    @Transactional
     public void updateStatus(User user) {
         userMapper.updateById(user);
     }
 
     @Override
+    @Transactional
     public void deleteUserById(Integer id) {
         userMapper.deleteById(id);
     }
 
+    /**
+     * 1.要求密码加密处理
+     * 2.入库/更新的时间（框架帮助完成）
+     * 3.什么是事务：操作成功 数据库提交事务，操作失败则事务回滚（要么都成功，要么都失败）
+     *      关于事务控制的说明：
+     *          1.rollbackFor：遇到某种异常时进行事务回滚
+     *              如：@Transactional(rollbackFor = Exception.class) 遇到所有异常都回滚
+     *          2.noRollbackFor：遇到某种异常时不进行事务回滚
+     *          以上两种属性只在特殊环境下使用，一般条件下采用默认行为
+     */
     @Override
+    @Transactional  //异常的两大类：1.运行期异常 2.编译异常(检查异常)
+                    // @Transactional（事务）默认条件下只对运行期异常有效
     public boolean addUser(User user) {
         //判断用户是否已经存在
         String username = user.getUsername();
@@ -121,6 +136,7 @@ public class UserServiceImpl implements UserService{
         //设置用户状态
         user.setStatus(true);
         userMapper.insert(user);
+        // int a = 1/0; 因为添加了事务，所以一旦程序出现异常，就会回滚
         return true;
     }
 
