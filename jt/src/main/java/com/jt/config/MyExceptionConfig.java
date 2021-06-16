@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice   //全局异常处理注解  返回值为JSON
 public class MyExceptionConfig {
     //问题2：什么时候调用？ 有异常的时候调用
+    // @ExceptionHandler(xxx.class) 表示捕获什么样类型的异常
     // @ExceptionHandler({RuntimeException.class, SqlSessionException.class})   //表示捕获多个异常
-    @ExceptionHandler(RuntimeException.class)   //运行时异常时执行
+    @ExceptionHandler(RuntimeException.class)   //运行时异常时 进行捕获
     public Object handler(Exception exception){
         // 将报错信息控制台打印
         exception.printStackTrace();
