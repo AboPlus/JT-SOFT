@@ -79,8 +79,8 @@ public class ItemCatController {
      * - 返回值结果 SysResult对象
      */
     @DeleteMapping("/deleteItemCat")
-    public SysResult deleteItemCat(ItemCat itemCat){
-        Boolean flag = itemCatService.deleteItemCat(itemCat);
-        return flag?SysResult.success():SysResult.fail();
+    public SysResult deleteItemCat(Integer id, Integer level){
+        itemCatService.deleteItemCat(id, level);
+        return SysResult.success();
     }
 }

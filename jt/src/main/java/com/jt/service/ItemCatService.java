@@ -14,5 +14,5 @@ public interface ItemCatService {
 
     Boolean updateItemCat(ItemCat itemCat);
 
-    Boolean deleteItemCat(ItemCat itemCat);
+    void deleteItemCat(Integer id, Integer level);
 }

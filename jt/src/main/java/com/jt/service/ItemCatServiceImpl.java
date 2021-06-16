@@ -1,5 +1,6 @@
 package com.jt.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.jt.mapper.ItemCatMapper;
 import com.jt.pojo.ItemCat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,14 +150,39 @@ public class ItemCatServiceImpl implements ItemCatService{
     }
 
     @Override
-    @Transactional
-    public Boolean deleteItemCat(ItemCat itemCat) {
-        int rows = itemCatMapper.deleteById(itemCat.getId());
-        if (rows == 0) {
-            return false;
+    public void deleteItemCat(Integer id, Integer level) {
+        if(level == 3){
+            //如果是三级商品分类菜单则直接删除
+            itemCatMapper.deleteById(id);
         }
-        return true;
-    }
 
+        if(level == 2){
+            //先删除3级菜单
+            QueryWrapper<ItemCat> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("parent_id",id);
+            itemCatMapper.delete(queryWrapper);
+            //先删除2级菜单
+            itemCatMapper.deleteById(id);
+        }
+
+        if(level == 1) {
+            //1.查询二级分类信息 parent_id=一级ID
+            QueryWrapper<ItemCat> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("parent_id", id);
+            //获取主键信息(第一列信息)
+            List<Object> twoIdList = itemCatMapper.selectObjs(queryWrapper);
+            //2.先删除3级
+            for (Object twoId : twoIdList) {
+                QueryWrapper<ItemCat> queryWrapper2 = new QueryWrapper<>();
+                queryWrapper2.eq("parent_id", twoId);
+                itemCatMapper.delete(queryWrapper2);
+                //将2级删除
+                Integer intTwoId = (Integer) twoId;
+                itemCatMapper.deleteById(intTwoId);
+            }
+            //3.删除一级商品分类信息
+            itemCatMapper.deleteById(id);
+        }
+    }
 
 }
