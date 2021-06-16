@@ -18,7 +18,7 @@ public class Item extends BasePojo{
     private Integer id;         //商品Id号
     private String title;       //商品标题信息
     private String sellPoint;   //卖点信息
-    private Integer price;      //商品价格
+    private Integer price;      //商品价格 存储时扩大100倍，取值时再缩小100倍
     private Integer num;        //商品数量
     private String images;       //商品图片
     private Integer itemCatId;  //商品分类ID号

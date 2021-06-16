@@ -31,7 +31,7 @@ public class ItemCatServiceImpl implements ItemCatService{
      *          Map<二级id,List<ItemCat>>   这里List<ItemCat>是三级目录    通过map.get(0)拿到三级目录
      */
     // 一、封装一个Map集合
-    public Map<Integer,List<ItemCat>> getmap () {
+    public Map<Integer,List<ItemCat>> getMap () {
         Map<Integer,List<ItemCat>> map = new HashMap<>();
         // 1.查询所有的数据信息
         List<ItemCat> list = itemCatMapper.selectList(null);
@@ -57,7 +57,7 @@ public class ItemCatServiceImpl implements ItemCatService{
     @Override
     public List<ItemCat> findItemCatList(Integer type) {
         // 获取数据封装后的结果
-        Map<Integer,List<ItemCat>> map = getmap();
+        Map<Integer,List<ItemCat>> map = getMap();
         List<ItemCat> catList = new ArrayList<>();
         if (type == 1) {    //获取一级商品分类信息
             return map.get(0);

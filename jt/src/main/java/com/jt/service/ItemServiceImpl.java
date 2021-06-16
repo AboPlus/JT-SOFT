@@ -17,16 +17,21 @@ public class ItemServiceImpl implements ItemService{
     @Autowired
     private ItemMapper itemMapper;
 
+    /**
+     * PageResult {query.pageNum,pageSize,rows分页数据,total} :业务数据的VO对象
+     * page:MP中的分页对象
+     */
     @Override
     public PageResult getItemList(PageResult pageResult) {
         IPage<Item> page = new Page<>(pageResult.getPageNum(), pageResult.getPageSize());
         QueryWrapper<Item> queryWrapper = new QueryWrapper<>();
         boolean flag = StringUtils.hasLength(pageResult.getQuery());
         queryWrapper.like(flag, "title", pageResult.getQuery());
-        IPage<Item> itemIPage = itemMapper.selectPage(page, queryWrapper);
-        long total = itemIPage.getTotal();
-        List<Item> records = itemIPage.getRecords();
-        pageResult.setTotal(total).setRows(records);
+        // 经过程序的分页，其中的数据全部获取(传来的page只有两条属性，现在有了五条)
+        page = itemMapper.selectPage(page, queryWrapper);
+        long total = page.getTotal();
+        List<Item> records = page.getRecords();
+        pageResult.setTotal(total).setRows(records);//MP获取
         return pageResult;
     }
 
