@@ -150,6 +150,7 @@ public class ItemCatServiceImpl implements ItemCatService{
     }
 
     @Override
+    @Transactional
     public void deleteItemCat(Integer id, Integer level) {
         if(level == 3){
             //如果是三级商品分类菜单则直接删除
