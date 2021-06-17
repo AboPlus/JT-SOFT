@@ -23,6 +23,7 @@ public class ItemCatServiceImpl implements ItemCatService{
      *      1.提高程序的效率  减少数据库交互的次数
      *      2.查询的方法最好单独的抽取
      * 问题：如何有效的存储父子关系
+     * 在map中需要一个key存储多个数据的时候，首先要想到的是Map<key,list>的造型
      * 数据结构：Map<key,value>  ———— 设计成：Map<parentId,子级>
      * 说明：设计成 Map<parentId,子级> 之后，map.get(parentId)拿到的就是子级
      *      例如：
@@ -42,7 +43,7 @@ public class ItemCatServiceImpl implements ItemCatService{
             // 有key：我找到父级的自己序列 将子级追加到序列中即可
             if (map.containsKey(itemCat.getParentId())){
                 // 有父级
-                // 获取父级的所有已知子级 . 追加一个itemCat
+                // 获取父级的所有已知子级的集合 . 追加一个itemCat
                  map.get(itemCat.getParentId()).add(itemCat);
             }else {
                 // 没有父级
@@ -53,12 +54,12 @@ public class ItemCatServiceImpl implements ItemCatService{
         }
         return map;
     }
+
     // 商品分类查询 方式二：HashMap方法实现  只查询一次数据库   步骤：一、二、三
     @Override
     public List<ItemCat> findItemCatList(Integer type) {
         // 获取数据封装后的结果
         Map<Integer,List<ItemCat>> map = getMap();
-        List<ItemCat> catList = new ArrayList<>();
         if (type == 1) {    //获取一级商品分类信息
             return map.get(0);
         }
@@ -156,7 +157,6 @@ public class ItemCatServiceImpl implements ItemCatService{
             //如果是三级商品分类菜单则直接删除
             itemCatMapper.deleteById(id);
         }
-
         if(level == 2){
             //先删除3级菜单
             QueryWrapper<ItemCat> queryWrapper = new QueryWrapper<>();
@@ -165,7 +165,6 @@ public class ItemCatServiceImpl implements ItemCatService{
             //先删除2级菜单
             itemCatMapper.deleteById(id);
         }
-
         if(level == 1) {
             //1.查询二级分类信息 parent_id=一级ID
             QueryWrapper<ItemCat> queryWrapper = new QueryWrapper<>();

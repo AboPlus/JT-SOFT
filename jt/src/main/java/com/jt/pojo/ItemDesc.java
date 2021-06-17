@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class ItemDesc extends BasePojo{
 
-    private Integer id;
-    private String itemDesc;
+    private Integer id;         // id与item的id保持一致
+    private String itemDesc;    // 该属性保存的是页面HTML代码片段
 
 }
