@@ -20,3 +20,10 @@ mybatis-plus:
 logging:
   level:
     com.jt.mapper: debug
+
+# 标识图片上传的路径
+file:
+  # 本地存储的根目录
+  localDir: D:/photo
+  # 网络访问虚拟路径
+  urlPath: http://image.jt.com

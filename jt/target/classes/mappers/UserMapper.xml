@@ -4,4 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jt.mapper.UserMapper">
 
+    <!-- MyBatis 中设定主键自动回显 -->
+    <!--<insert id="xxx" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+
+    </insert>-->
+
 </mapper>
