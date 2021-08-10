@@ -25,5 +25,6 @@ logging:
 file:
   # 本地存储的根目录
   localDir: D:/photo
+  # localDir: /usr/local/src/images
   # 网络访问虚拟路径
   urlPath: http://image.jt.com
